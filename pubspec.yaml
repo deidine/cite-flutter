@@ -1,0 +1,53 @@
+name: cite3
+description: "A new Flutter project."
+
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.2 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+
+  cupertino_icons: ^1.0.2
+  get: ^4.6.6
+  cached_network_image: ^3.3.1
+  flutter_spinkit: ^5.2.0
+  intl: ^0.19.0
+  pull_to_refresh: ^2.0.0
+  image_picker: ^1.0.7
+  syncfusion_flutter_datepicker: ^24.2.3
+  google_fonts: ^6.1.0
+  http: ^1.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+
+  fonts:
+    - family: Sarabun
+      fonts:
+        - asset: fonts/Sarabun-Light.ttf
+          weight: 300
+          style: italic
+    - family: Itim
+      fonts:
+        - asset: fonts/Itim-Regular.ttf
+       
+          weight: 700

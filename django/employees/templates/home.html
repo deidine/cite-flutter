@@ -1,0 +1,64 @@
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+div {text-align: center;}
+h4 {text-align: left}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<h4> Hi {{request.user}}!</h4>
+<div>
+<h4> <a href = {% url 'logout'%}>Logout Here</a></h4>
+<h1>List of employees</h1>
+<form method='POST' action="{% url 'home'%}" enctype="multipart/form-data">
+{% csrf_token %}
+{{form.as_p}}
+<input type='Submit' value='Add new employee'>
+</form>
+</div>
+<table>
+<tr>
+<th>Name</th>
+<th>Salary</th>
+<th>Date of Joining</th>
+<th>Age</th>
+<th>Profile Picture</th>
+<th>Delete</th>
+<th>Update</th>
+</tr>
+{%for i in list%}
+<tr>
+<td>{{i.name}}</td>
+<td>{{i.salary}}</td>
+<td>{{i.date_of_joining}}</td>
+<td>{{i.age}}</td>
+<td><img src="media/{{i.picture}}"height="100" width="100"></td>
+<td>
+<form method='POST' action="{% url 'delete' i.id%}">
+{% csrf_token %}
+<input type="Submit" value="Delete">
+</form>
+</td>
+<td>
+<form method='GET' action="{% url 'update' i.id%}">
+{% csrf_token %}
+<input type="Submit" value="Edit">
+</form>
+</td>
+</tr>
+{%endfor%}
+</table>
+
+

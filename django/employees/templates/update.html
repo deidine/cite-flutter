@@ -1,0 +1,6 @@
+<h1>Update Page</h1>
+<form method='POST' enctype="multipart/form-data">
+{% csrf_token %}
+{{form.as_p}}
+<input type="Submit" value="Update">
+</form>
