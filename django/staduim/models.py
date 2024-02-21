@@ -10,3 +10,4 @@ class Stadium(models.Model):
     stdClosedId = models.CharField(max_length=50)
     stdClosedDate = models.DateField(null=True, blank=True)
     stdClosedNote = models.TextField(null=True, blank=True)
+    

@@ -1,3 +1,4 @@
+import 'package:cite3/app/modules/booking_field/widgets/selectTime.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -26,6 +27,9 @@ class BookingFieldView extends GetView<BookingFieldController> {
               onSelectionChanged: controller.handleUserDatePick,
               initialDate: controller.getCurrentDateTime(),
             ),
+           
+
+            SeletTime(),
             const TimeRangePickerBuilder(),
           ],
         ),

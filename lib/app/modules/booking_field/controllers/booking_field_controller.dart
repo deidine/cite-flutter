@@ -1,4 +1,6 @@
+import 'package:cite3/app/data/model/reservation/reservation_response.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:cite3/app/core/themes/custom_snackbar_theme.dart';
 import 'package:cite3/app/data/model/reservation/schedule_request.dart';
@@ -8,8 +10,6 @@ import 'package:cite3/app/helper/formatted_price.dart';
 import 'package:cite3/app/modules/booking_field/widgets/dialog_content.dart';
 import 'package:cite3/app/modules/home/controllers/home_controller.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
-import '../../../data/model/reservation/reservation_request.dart';
 
 const millisecondToHour = 3600000;
 
@@ -69,19 +69,38 @@ class BookingFieldController extends GetxController {
   }
 
   void handleEditReservation() async {
-    final beginTime = userPickDateSinceEpoch + userHours[0] * millisecondToHour;
-    final endTime = userPickDateSinceEpoch +
-        userHours[userHours.length - 1] * millisecondToHour;
+    int picked = 0;
+    if (userHours.length == 3) {
+      picked = 2;
+    }
+    if (userHours.length == 2) {
+      picked = 1;
+    }
+    if (userHours.length == 1) {
+      picked = 0;
+    }
+    final DateFormat timeFormat = DateFormat('HH:mm:ss');
+    final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+
+// Format beginTime and endTime
+    final beginTime = timeFormat.format(DateTime.fromMillisecondsSinceEpoch(
+        userPickDateSinceEpoch + userHours[0] * millisecondToHour));
+    final endTime = timeFormat.format(DateTime.fromMillisecondsSinceEpoch(
+        userPickDateSinceEpoch +
+            userHours[userHours.length - 1] * millisecondToHour));
+
+    final bookingTime = dateFormat.format(DateTime.now());
+
     final totalPrice = infoVenue.pricePerHour * userHours.length;
-    final request = ReservationRequest(
-      idTransaction: transactionId,
+    final request = ReservationResponse(
+      transactionId: transactionId,
       totalPrice: totalPrice,
       beginTime: beginTime,
       endTime: endTime,
-      hours: userHours,
+      hours: userHours[picked],
       venueId: infoVenue.idVenue,
       userId: homeController.dataUser?.idUser,
-      bookingTime: getCurrentDateTime().millisecondsSinceEpoch,
+      bookingTime: bookingTime,
     );
 
     await ReservationService.updateReservation(request).then(
@@ -94,18 +113,37 @@ class BookingFieldController extends GetxController {
   }
 
   void createReservation() async {
-    final beginTime = userPickDateSinceEpoch + userHours[0] * millisecondToHour;
-    final endTime = userPickDateSinceEpoch +
-        userHours[userHours.length - 1] * millisecondToHour;
+    final DateFormat timeFormat = DateFormat('HH:mm:ss');
+    final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
+
+// Format beginTime and endTime
+    final beginTime = timeFormat.format(DateTime.fromMillisecondsSinceEpoch(
+        userPickDateSinceEpoch + userHours[0] * millisecondToHour));
+    final endTime = timeFormat.format(DateTime.fromMillisecondsSinceEpoch(
+        userPickDateSinceEpoch +
+            userHours[userHours.length - 1] * millisecondToHour));
+// Format bookingTime
+    final bookingTime = dateFormat.format(DateTime.now());
+
     final totalPrice = infoVenue.pricePerHour * userHours.length;
-    final request = ReservationRequest(
+    int picked = 0;
+    if (userHours.length == 3) {
+      picked = 2;
+    }
+    if (userHours.length == 2) {
+      picked = 1;
+    }
+    if (userHours.length == 1) {
+      picked = 0;
+    }
+    final request = ReservationResponse(
       totalPrice: totalPrice,
       beginTime: beginTime,
       endTime: endTime,
-      hours: userHours,
+      hours: userHours[picked],
       venueId: infoVenue.idVenue,
       userId: homeController.dataUser?.idUser,
-      bookingTime: getCurrentDateTime().millisecondsSinceEpoch,
+      bookingTime: bookingTime,
     );
 
     final dialogModel = DialogContentModel(
@@ -122,7 +160,7 @@ class BookingFieldController extends GetxController {
     showOrderDialogSummary(dialogModel);
   }
 
-  void createReservationRequest(ReservationRequest request) async {
+  void createReservationRequest(ReservationResponse request) async {
     await ReservationService.createReservation(request).then(
       (_) {
         CustomSnackbar.successSnackbar(

@@ -58,9 +58,9 @@ class ListUserReservationBuilder extends StatelessWidget {
                 height: 8,
               ),
               UserReservationBookingDateBuilder(
-                date: getformattedDateFromEpochTime(
-                  reservations[index].bookingTime,
-                ),
+                date:  
+                  reservations[index].bookingTime  ,
+                
               ),
               const SizedBox(
                 height: 10,
@@ -89,10 +89,9 @@ class ListUserReservationBuilder extends StatelessWidget {
                 height: 4,
               ),
               UserReservationScheduleBuilder(
-                date: getformattedDateFromEpochTime(
-                  reservations[index].playTime,
-                ),
-              ),
+                date: 
+                  reservations[index].playTime ,
+               ),
               const SizedBox(
                 height: 10,
               ),

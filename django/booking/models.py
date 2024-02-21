@@ -1,11 +1,16 @@
 from django.db import models
+from  employees.models import EmployeeList
+
+from  venue.models import Venue
 
 class Booking(models.Model):
-    transactionId=models.IntegerField()
-    venueId = models.AutoField(primary_key=True)
-    userId = models.IntegerField()
-    beginTime = models.DateTimeField()
-    endTime = models.DateTimeField()
-    hours = models.DecimalField(max_digits=5, decimal_places=2)
-    bookingTime = models.DateTimeField(auto_now_add=True)
-    totalPrice = models.DecimalField(max_digits=10, decimal_places=2)
+    id = models.AutoField(primary_key=True)
+    transactionId=models.CharField(max_length=23)
+    venueId=models.ForeignKey(Venue, on_delete=models.CASCADE)
+    userId = models.ForeignKey(EmployeeList, on_delete=models.CASCADE)
+    beginTime = models.TimeField()
+    endTime = models.TimeField()
+    hours = models.IntegerField( )
+    bookingTime = models.DateField( )
+    totalPrice = models.IntegerField( )
+    status=models.CharField(max_length=23)

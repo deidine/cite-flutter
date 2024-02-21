@@ -1,9 +1,8 @@
 from django.db import models
-
-from booking.models import Booking
+ 
 
 class Venue(models.Model):
-    venueId = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    venueId =  models.AutoField(primary_key=True)
     venueName = models.CharField(max_length=100)
     pricePerHour =models.IntegerField()
     location = models.CharField(max_length=200)

@@ -6,7 +6,7 @@ from .models import Booking
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('venueId','userId',
                     'beginTime','endTime','hours',
-                    'bookingTime','totalPrice','transactionId')
+                    'bookingTime','totalPrice','transactionId','status')
 
  
 # Register your models here.

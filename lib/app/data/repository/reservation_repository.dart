@@ -6,40 +6,59 @@ import 'package:get/get.dart';
 import 'package:cite3/app/data/model/reservation/reservation_response.dart';
 import 'package:cite3/app/data/model/reservation/schedule_request.dart';
 import 'package:cite3/app/data/provider/api_provider.dart';
-
-import '../model/reservation/reservation_request.dart';
-
+ 
 abstract class ReservationRepository {
   static final getConnect = GetConnect();
 
   static Future<List<int>> getSchedule(ScheduleRequest request) async {
      
-    print("booking function");
+    print("booking function$request");
   
     // return req.body['data'].cast<int>();
 
   var url =
         Uri.parse('${ApiProvider.getSchedule}?venue=${request.venueId}&date=${request.date}');
 
-    final response = await http.get(url, headers: <String, String>{
+    final req = await http.get(url, headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     });
-   
-    var extractedData = json.decode(response.body) as List<int>;
-    if (extractedData == null) {}
+    List<int> getData = [];
+
+// Decode the JSON response body
+var _extractedData = json.decode(req.body);
+
+// Check if the decoded data is not null and is a map
+if (_extractedData != null && _extractedData is Map<String, dynamic>) {
+  // Extract the 'hours' field from the decoded data
+  dynamic hoursData = _extractedData['hours'];
   
-    return extractedData;
+  // Check if the 'hours' field is not null and is an int
+  if (hoursData != null && hoursData is int) {
+    getData.add(hoursData); // Add the 'hours' value to the list
+  }
+}
+
+return getData;
     }
 
   static Future<List<ReservationResponse>> getReservationListByUserId(
       int userId) async {
-    final url = '${ApiProvider.getReservationById}$userId';
+    var url= Uri.parse('${ApiProvider.getReservationById}$userId/');
 
-    final req = await getConnect.get(url);
+    final response = await http.get(url, headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    print("la reponse du venu${response}");
 
-    final data = req.body['data'] as List;
-
-    return data.map((each) => ReservationResponse.fromJson(each)).toList();
+    // final List<VenueResponse> data =response.body['data'];
+    List<ReservationResponse> getData = [];
+    var _extractedData = json.decode(response.body) as List;
+    if (_extractedData == null) {}
+    getData = _extractedData
+        .map<ReservationResponse>((json) => ReservationResponse.fromJson(json))
+        .toList();
+    print("je suios od");
+    return getData; 
   }
 
   static Future<void> cancelReservation(String idTransaction) async {
@@ -52,16 +71,31 @@ abstract class ReservationRepository {
     }
   }
 
-  static Future<void> createReservation(ReservationRequest request) async {
+  static Future<void> createReservation(ReservationResponse request) async {
+ 
+     Response<dynamic> req;
+
     try {
-      const url = ApiProvider.createReservation;
-      await getConnect.post(url, request.createReservationToJson());
+      req = await getConnect.post(ApiProvider.createReservation, request.createReservationToJson());
+      print(req.statusCode );
+      print(req );
+       if (req.statusCode == 201) {
+        // Successfully created
+        print('reservetion created successfully');
+        // return 201;
+      } else {
+        // Failed to create
+        print('Failed to create reservation');
+    // return 400;
+
+      }
+      // return RegisterResponse.fromJson(req.body);
     } catch (e) {
-      log(e.toString());
+      throw Exception('Failed to send request');
     }
   }
 
-  static Future<void> updateReservation(ReservationRequest request) async {
+  static Future<void> updateReservation(ReservationResponse request) async {
     try {
       const url = ApiProvider.updateReservation;
       await getConnect.put(url, request.updateReservationToJson());
@@ -72,11 +106,26 @@ abstract class ReservationRepository {
 
   static Future<List<int>> getScheduleExcludeTxId(
       ScheduleRequest request) async {
-    final url =
-        '${ApiProvider.getScheduleExcludeTxId}?venue=${request.venueId}&date=${request.date}&txId=${request.txId}';
+     
+     
+  //   return req.body['data'].cast<int>();
+  // }
+     var url =
+        Uri.parse('${ApiProvider.getScheduleExcludeTxId}?venue=${request.venueId}&date=${request.date}&txId=${request.txId}');
 
-    var req = await getConnect.get(url);
+    final req = await http.get(url, headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    print("la reponse du venu${req}");
 
-    return req.body['data'].cast<int>();
-  }
+    // final List<int> data =response.body['data'];
+    List<int> getData = [];
+    var _extractedData = json.decode(req.body) as List<int>;
+    if (_extractedData == null) {}
+    getData = _extractedData.toList();
+    print("je suios od$getData");
+    return getData;
+ 
+}
+
 }

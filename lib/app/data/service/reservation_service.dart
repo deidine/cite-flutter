@@ -18,11 +18,11 @@ abstract class ReservationService {
     ReservationRepository.cancelReservation(idTransaction);
   }
 
-  static Future<void> createReservation(ReservationRequest request) async {
+  static Future<void> createReservation(ReservationResponse request) async {
     ReservationRepository.createReservation(request);
   }
 
-  static Future<void> updateReservation(ReservationRequest request) async {
+  static Future<void> updateReservation(ReservationResponse request) async {
     ReservationRepository.updateReservation(request);
   }
 

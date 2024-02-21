@@ -1,5 +1,5 @@
 abstract class ApiProvider {
-  static const _baseUrl = 'https://6449-193-146-150-220.ngrok-free.app';
+  static const _baseUrl = 'https://819a-41-188-100-175.ngrok-free.app';
 
   static const register =
       '$_baseUrl/home/create/';
@@ -9,12 +9,12 @@ abstract class ApiProvider {
   static const updateUser = '$_baseUrl/home/api/employees/'; // {userId}
 
   static const getSchedule = 
-      '$_baseUrl/api/bookings'; // ?venue={venueId}&date={date}
+      '$_baseUrl/api/bookings/'; // ?venue={venueId}&date={date}
   static const getReservationById = '$_baseUrl/api/bookings/'; // /{userId}
   static const base = _baseUrl; // /{userId}
   static const cancelReservation = '$_baseUrl/api/bookings/'; // /{reservationId}
-  static const createReservation = '$_baseUrl/api/bookings';
-  static const updateReservation = '$_baseUrl/api/bookings';
+  static const createReservation = '$_baseUrl/api/bookings/';
+  static const updateReservation = '$_baseUrl/api/bookings/';
   static const getScheduleExcludeTxId =
       '$_baseUrl/api/bookings/schedule'; // ??venue={venueId}&date={date}&txId={txId}
 

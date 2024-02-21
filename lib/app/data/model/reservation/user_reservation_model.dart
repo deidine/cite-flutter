@@ -4,9 +4,9 @@ class UserReservation {
   int venueId;
   int pricePerHour;
   int totalPrice;
-  List<int> hours;
-  int bookingTime;
-  int playTime;
+  int hours;
+  String bookingTime;
+  String  playTime;
   String imageLink;
 
   UserReservation({

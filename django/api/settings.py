@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$n5hm&f5g8w)brc0wfc+j)u$jo)b8k8nvp$vea4f3tfbawgpng
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['6449-193-146-150-220.ngrok-free.app','127.0.0.1']
+ALLOWED_HOSTS = ['819a-41-188-100-175.ngrok-free.app','127.0.0.1']
 
 
 # Application definition
@@ -91,7 +91,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DATABASES = { 'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'citte5',
+        'NAME': 'citte7',
         'USER': 'root',
         'PASSWORD': '',
         'HOST':'localhost',

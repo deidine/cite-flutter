@@ -20,7 +20,7 @@ class SelectedTime extends StatelessWidget {
       backgroundColor: blue,
       borderColor: Colors.transparent,
       hour: hour,
-      hourColor: Colors.white,
+      hourColor: const Color.fromARGB(255, 31, 31, 31),
     );
   }
 }

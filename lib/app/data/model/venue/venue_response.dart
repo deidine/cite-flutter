@@ -41,7 +41,7 @@ class VenueResponse {
     }
 
     return VenueResponse(
-      idVenue:  json['venueId_id'] ,
+      idVenue:  json['venueId'] ,
       venueName: json['venueName'],
       pricePerHour:  json['pricePerHour'] ,
       location: json['location'],

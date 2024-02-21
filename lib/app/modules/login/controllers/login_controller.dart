@@ -35,16 +35,13 @@ class LoginController extends GetxController with StateMixin {
     final inputtedUsername = usernameController.text;
     final inputtedPassword = passwordController.text;
 
-    final loginRequest = RegisterRequest(
-      username: inputtedUsername,
-      password: inputtedPassword,
-    );
+   
 
     change(false, status: RxStatus.loading());
     final isValid = await LoginService.login(inputtedUsername,inputtedPassword);
     change(true, status: RxStatus.success());
 
-    if (isValid) {
+    if (isValid ?? false) {
       Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
       return;
     }

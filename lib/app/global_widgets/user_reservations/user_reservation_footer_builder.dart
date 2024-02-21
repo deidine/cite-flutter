@@ -16,7 +16,7 @@ class UserReservationFooterBuilder extends StatelessWidget {
     required this.transactionId,
   }) : super(key: key);
 
-  final List<int> hours;
+  final int hours;
   final bool isUsingCustomActionButton;
   final void Function(String)? cancelFunction;
   final void Function(UserReservation)? editFunction;
@@ -30,13 +30,11 @@ class UserReservationFooterBuilder extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          ...hours
-              .map(
-                (playHour) => SinglePlayHourBuilder(
-                  number: playHour.toString(),
+                SinglePlayHourBuilder(
+                  number: hours.toString(),
                 ),
-              )
-              .toList(),
+               
+               
           const Spacer(
             flex: 1,
           ),

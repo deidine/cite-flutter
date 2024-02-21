@@ -1,3 +1,6 @@
+import 'dart:ui';
+ 
+import 'package:cite3/citte_owner/OwnerHomePage.dart';
 import 'package:get/get.dart';
 
 import '../modules/active_booking/bindings/active_booking_binding.dart';
@@ -28,6 +31,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
+  // static const INITIAL =Routes.dock;
   static const INITIAL = Routes.ONBOARDING;
 
   static final routes = [
@@ -47,7 +51,11 @@ class AppPages {
       name: _Paths.ONBOARDING,
       page: () => const OnboardingView(),
       binding: OnboardingBinding(),
-    ),
+    ),   
+    // GetPage(
+    //   name: _Paths.doc,
+    //   page: () => const  OwnerHomePage(  ),
+    // ),
     GetPage(
       name: _Paths.LOGIN,
       page: () => const LoginView(),

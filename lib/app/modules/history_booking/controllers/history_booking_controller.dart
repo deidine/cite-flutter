@@ -38,33 +38,36 @@ class HistoryBookingController extends GetxController with StateMixin {
     });
   }
 
-  VenueResponse getDetailVenue(String idVenue) {
-    return allvenueController.venues
-        .where((element) => element.idVenue == idVenue)
-        .first;
+  VenueResponse? getDetailVenue(int idVenue) {
+    if (allvenueController.venues.isNotEmpty) {
+      return allvenueController.venues
+          .where((element) => element.idVenue == idVenue)
+          .first;
+    }
+    return null;
   }
 
-  int getPricePerHour(String idVenue) => getDetailVenue(idVenue).pricePerHour;
+  int getPricePerHour(int? idVenue) => getDetailVenue(idVenue!)!.pricePerHour;
 
-  String getVenueName(String idVenue) => getDetailVenue(idVenue).venueName;
+  String getVenueName(int? idVenue) => getDetailVenue(idVenue!)!.venueName;
 
-  String getVenueImage(String idVenue) => getDetailVenue(idVenue).image;
+  String getVenueImage(int? idVenue) => getDetailVenue(idVenue!)!.image;
 
   void updateBookedFields() {
     bookedFieldsModel.value = reservations.map(
       (element) {
-        element.hours.sort();
+        element.hours;
 
         return UserReservation(
-          venueId: element.venueId,
-          transactionId: element.transactionId,
-          venueName: getVenueName(element.venueId as String),
-          pricePerHour: getPricePerHour(element.venueId as String),
+          venueId: element.venueId!,
+          transactionId: element.transactionId!,
+          venueName: getVenueName(element.venueId),
+          pricePerHour: getPricePerHour(element.venueId),
           totalPrice: element.totalPrice,
           hours: element.hours,
           bookingTime: element.bookingTime,
           playTime: element.beginTime,
-          imageLink: getVenueImage(element.venueId as String),
+          imageLink: getVenueImage(element.venueId),
         );
       },
     ).toList();

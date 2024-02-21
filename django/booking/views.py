@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Booking
-from .serializers import BookingSerializer
+from .serializers import BookingSerializer 
 
 @api_view(['GET', 'POST'])
 def booking_list(request):
@@ -14,10 +14,26 @@ def booking_list(request):
         return JsonResponse(serializer.data,safe=False)
     
     elif request.method == 'POST':
-        serializer = BookingSerializer(data=request.data)
+        data2 = {
+        "venueId": request.data.get('venueId'),
+        "userId": request.data.get('userId'),
+        "beginTime": request.data.get('beginTime'),
+        "endTime": request.data.get('endTime'),
+        "hours": request.data.get('hours'),
+        "bookingTime": request.data.get('bookingTime'),
+        "totalPrice": request.data.get('totalPrice'),
+        "transactionId": 1,
+        "status":"invalid"
+    } 
+        
+        print(data2)
+        serializer = BookingSerializer(data=data2)
+        # print(serializer)
+        print(serializer.is_valid())
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -63,3 +79,38 @@ def bookingsVenuDate(request):
              'endTime': booking.endTime, 'hours': booking.hours, 'bookingTime': booking.bookingTime,
              'totalPrice': booking.totalPrice} for booking in bookings]
     return JsonResponse(data, safe=False)
+
+
+
+def get_schedule(request):
+    if request.method == 'GET':
+        venue_id = request.GET.get('venue')
+        date_str = request.GET.get('date')
+        
+        try:
+            date = datetime.fromtimestamp(int(date_str) / 1000)  # Convert milliseconds since epoch to Python datetime
+        except ValueError:
+            return JsonResponse({'error': 'Invalid date'}, status=400)
+
+        # Query bookings for the given venue and date
+        bookings = Booking.objects.filter(venueId=venue_id, bookingTime__date=date.date())
+
+        # Extract the hours from bookings
+        hours = [booking.beginTime for booking in bookings]
+
+        # Construct a list of available hours (e.g., all hours minus booked hours)
+        all_hours = list(range(8, 20))  # Assuming working hours are from 8:00 to 20:00
+        available_hours = [hour for hour in all_hours if hour not in hours]
+
+        return JsonResponse({'hours': available_hours})
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+def get_booking(request,id):
+ 
+    list=Booking.objects.filter(userId=id)
+    serializer = BookingSerializer(list, many=True)
+
+    # return JsonResponse({'employees': employees})
+    return JsonResponse(serializer.data, safe=False) 
+

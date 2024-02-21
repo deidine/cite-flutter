@@ -83,11 +83,11 @@ class ActiveBookingController extends GetxController with StateMixin {
   void updateBookedFields() {
     bookedFieldsModel.value = reservations.map(
       (element) {
-        element.hours.sort();
+        // element.hours.sort();
 
         return UserReservation(
-          venueId: element.venueId,
-          transactionId: element.transactionId,
+          venueId: element.venueId!,
+          transactionId: element.transactionId!,
           venueName: getVenueName(element.venueId),
           pricePerHour: getPricePerHour(element.venueId),
           totalPrice: element.totalPrice,
@@ -101,16 +101,19 @@ class ActiveBookingController extends GetxController with StateMixin {
     refresh();
   }
 
-  int getPricePerHour(int idVenue) => getDetailVenue(idVenue as String).pricePerHour;
+  int getPricePerHour(int? idVenue) => getDetailVenue(idVenue!)!.pricePerHour;
 
-  String getVenueName(int idVenue) => getDetailVenue(idVenue as String).venueName;
+  String getVenueName(int? idVenue) => getDetailVenue(idVenue!)!.venueName;
 
-  String getVenueImage(int idVenue) => getDetailVenue(idVenue as String).image;
+  String getVenueImage(int? idVenue) => getDetailVenue(idVenue!)!.image;
 
-  VenueResponse getDetailVenue(String idVenue) {
-    return allvenueController.venues
-        .where((element) => element.idVenue == idVenue)
-        .first;
+  VenueResponse? getDetailVenue(int idVenue) {
+    if (allvenueController.venues.isNotEmpty) {
+      return allvenueController.venues
+          .where((element) => element.idVenue == idVenue)
+          .first;
+    }
+    return null;
   }
 
   void firstTimeFetchData() async {
@@ -127,7 +130,7 @@ class ActiveBookingController extends GetxController with StateMixin {
   Future<void> fetchData() async {
     final userId = dataUser.idUser;
     reservations.value =
-        await ReservationService.getReservationListByUserId(userId  ).then(
+        await ReservationService.getReservationListByUserId(userId).then(
       (value) => value.where((element) => element.status == 'valid').toList(),
     );
   }
