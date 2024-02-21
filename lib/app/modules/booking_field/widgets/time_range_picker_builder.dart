@@ -22,32 +22,44 @@ class TimeRangePickerBuilder extends GetView<BookingFieldController> {
             style: mediumText.copyWith(color: blue),
           ),
         ),
-        GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(8),
-          shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: Get.width / 6,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          ),
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            final workingHour = index + 1;
-            return Obx(
-              () => controller.temporaryHours.contains(workingHour)
-                  ? SelectedTime(
-                      hour: workingHour.toString(),
-                      onTap: () => controller.handleUserTimePick(workingHour),
-                    )
-                  : UnselectedTime(
-                      hour: workingHour.toString(),
-                      onTap: () => controller.handleUserTimePick(workingHour),
-                    ),
-            );
-          },
-        ),
-      ],
+      GridView.builder(
+  physics: const NeverScrollableScrollPhysics(),
+  padding: const EdgeInsets.all(8),
+  shrinkWrap: true,
+  semanticChildCount: 3,
+  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+    maxCrossAxisExtent: Get.width / 6,
+    crossAxisSpacing: 10,
+    mainAxisSpacing: 10,
+  ),
+  itemCount: 5, // Since we want 2 rows for 15 to 30 and then add 15
+  itemBuilder: (context, index) {
+    return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: Get.width / 6,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
+      itemCount: 3, // Since we want 3 columns for each row
+      itemBuilder: (context, innerIndex) {
+        final workingHour = index * 15 + innerIndex + 15;
+        return Obx(
+          () => controller.temporaryHours.contains(workingHour)
+              ? SelectedTime(
+                  hour: workingHour.toString(),
+                  onTap: () => controller.handleUserTimePick(workingHour),
+                )
+              : UnselectedTime(
+                  hour: workingHour.toString(),
+                  onTap: () => controller.handleUserTimePick(workingHour),
+                ),
+        );
+      },
+    );
+  },
+),],
     );
   }
 }

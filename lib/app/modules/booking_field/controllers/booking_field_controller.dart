@@ -139,10 +139,18 @@ class BookingFieldController extends GetxController {
     }
       final selectedTimeq = selectedTime.value;
 
+  // Calculate end time by adding user selected hours to the selected time
+  final endTime2 = timeFormat.format(DateTime(
+    0, // Year
+    0, // Month
+    0, // Day
+    selectedTimeq!.hour,
+    selectedTimeq.minute + userHours[picked],
+  ));
     final request = ReservationResponse(
       totalPrice: totalPrice,
       beginTime: "${selectedTimeq!.hour}:${selectedTimeq!.minute}",
-      endTime: endTime,
+      endTime: endTime2,
       hours: userHours[picked],
       venueId: infoVenue.idVenue,
       userId: homeController.dataUser?.idUser,
@@ -334,5 +342,5 @@ class BookingFieldController extends GetxController {
   }
 
   // Getter method to access the selected time
-
+ 
 }
