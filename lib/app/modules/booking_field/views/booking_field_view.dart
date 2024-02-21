@@ -1,4 +1,3 @@
-import 'package:cite3/app/modules/booking_field/widgets/selectTime.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -10,10 +9,11 @@ import '../widgets/time_range_picker_builder.dart';
 
 class BookingFieldView extends GetView<BookingFieldController> {
   const BookingFieldView({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customWhiteAppBar(controller.infoVenue.idVenue.toString()  ),
+      appBar: customWhiteAppBar(controller.infoVenue.idVenue.toString()),
       body: SmartRefresher(
         controller: controller.refreshController,
         onRefresh: () => controller.refreshSchedule(false),
@@ -27,9 +27,21 @@ class BookingFieldView extends GetView<BookingFieldController> {
               onSelectionChanged: controller.handleUserDatePick,
               initialDate: controller.getCurrentDateTime(),
             ),
-           
-
-            SeletTime(),
+            ElevatedButton(
+              onPressed: () {
+                controller.selectTime(); // Call function to show time picker
+              },
+              child: Text('Select Time'),
+            ),
+            Obx(() {
+              // Use Obx widget to listen to changes in selected time
+              final selectedTime = controller.selectedTime.value;
+              return selectedTime != null 
+                ? Text(
+                    'Selected Time: ${selectedTime!.hour}:${selectedTime!.minute}',
+                  )
+                : Container();
+            }),
             const TimeRangePickerBuilder(),
           ],
         ),

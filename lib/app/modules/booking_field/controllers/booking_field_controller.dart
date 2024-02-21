@@ -1,4 +1,5 @@
 import 'package:cite3/app/data/model/reservation/reservation_response.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -136,9 +137,11 @@ class BookingFieldController extends GetxController {
     if (userHours.length == 1) {
       picked = 0;
     }
+      final selectedTimeq = selectedTime.value;
+
     final request = ReservationResponse(
       totalPrice: totalPrice,
-      beginTime: beginTime,
+      beginTime: "${selectedTimeq!.hour}:${selectedTimeq!.minute}",
       endTime: endTime,
       hours: userHours[picked],
       venueId: infoVenue.idVenue,
@@ -309,4 +312,27 @@ class BookingFieldController extends GetxController {
   DateTime getMaxDateTimeCalendar() => DateTime.now().add(
         const Duration(days: 90),
       );
+  Rx<TimeOfDay?> selectedTime = Rx<TimeOfDay?>(null);
+
+  TimeOfDay? getSelectedTime() => selectedTime.value;
+
+// Function to show the time picker and update selectedTime
+  void selectTime() {
+    showTimePicker(
+      context: Get.overlayContext!,
+      initialTime: TimeOfDay.now(),
+    ).then((value) {
+      if (value != null) {
+        selectedTime.value = value;
+      }
+    }).catchError((error) {
+      CustomSnackbar.failedSnackbar(
+        title: 'Error',
+        message: 'Failed to pick time: $error',
+      );
+    });
+  }
+
+  // Getter method to access the selected time
+
 }
