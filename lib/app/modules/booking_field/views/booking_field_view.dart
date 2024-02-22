@@ -38,7 +38,7 @@ class BookingFieldView extends GetView<BookingFieldController> {
               final selectedTime = controller.selectedTime.value;
               return selectedTime != null 
                 ? Text(
-                    'Selected Time: ${selectedTime!.hour}:${selectedTime!.minute}',
+                    'Selected Time: ${selectedTime.hour}:${selectedTime.minute}',
                   )
                 : Container();
             }),

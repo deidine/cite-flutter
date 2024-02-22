@@ -23,7 +23,7 @@ class BookingFieldController extends GetxController {
   final refreshController = RefreshController();
 
   int userPickDateSinceEpoch = 0;
-
+ late DateTime selectedDateTimeFromCalander ;
   late List<int> hours;
   var temporaryHours = <int>[].obs;
 
@@ -117,14 +117,9 @@ class BookingFieldController extends GetxController {
     final DateFormat timeFormat = DateFormat('HH:mm:ss');
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
 
-// Format beginTime and endTime
-    final beginTime = timeFormat.format(DateTime.fromMillisecondsSinceEpoch(
-        userPickDateSinceEpoch + userHours[0] * millisecondToHour));
-    final endTime = timeFormat.format(DateTime.fromMillisecondsSinceEpoch(
-        userPickDateSinceEpoch +
-            userHours[userHours.length - 1] * millisecondToHour));
+ 
 // Format bookingTime
-    final bookingTime = dateFormat.format(DateTime.now());
+    final bookingTime = dateFormat.format(selectedDateTimeFromCalander);
 
     final totalPrice = infoVenue.pricePerHour * userHours.length;
     int picked = 0;
@@ -149,7 +144,7 @@ class BookingFieldController extends GetxController {
   ));
     final request = ReservationResponse(
       totalPrice: totalPrice,
-      beginTime: "${selectedTimeq!.hour}:${selectedTimeq!.minute}",
+      beginTime: "${selectedTimeq.hour}:${selectedTimeq.minute}",
       endTime: endTime2,
       hours: userHours[picked],
       venueId: infoVenue.idVenue,
@@ -299,6 +294,7 @@ class BookingFieldController extends GetxController {
   void handleUserDatePick(
       DateRangePickerSelectionChangedArgs selectedDate) async {
     DateTime selectedDateTime = selectedDate.value;
+    selectedDateTimeFromCalander= selectedDate.value;
     userPickDateSinceEpoch = selectedDateTime.millisecondsSinceEpoch;
 
     final request = ScheduleRequest(
@@ -320,6 +316,11 @@ class BookingFieldController extends GetxController {
   DateTime getMaxDateTimeCalendar() => DateTime.now().add(
         const Duration(days: 90),
       );
+
+
+
+
+
   Rx<TimeOfDay?> selectedTime = Rx<TimeOfDay?>(null);
 
   TimeOfDay? getSelectedTime() => selectedTime.value;
