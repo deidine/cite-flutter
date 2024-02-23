@@ -1,5 +1,5 @@
 class ReservationResponse {
-  final String? transactionId;
+  final int? transactionId;
   final int? venueId;
   int? userId;
   final String beginTime;

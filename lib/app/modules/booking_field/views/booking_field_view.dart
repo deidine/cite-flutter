@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:cite3/app/core/values/colors.dart';
 import 'package:cite3/app/global_widgets/custom_white_appbar.dart';
+import '../../active_booking/widgets/custom_action_button.dart';
 import '../controllers/booking_field_controller.dart';
 import '../widgets/date_range_picker_builder.dart';
 import '../widgets/time_range_picker_builder.dart';
@@ -27,12 +28,20 @@ class BookingFieldView extends GetView<BookingFieldController> {
               onSelectionChanged: controller.handleUserDatePick,
               initialDate: controller.getCurrentDateTime(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                controller.selectTime(); // Call function to show time picker
-              },
-              child: Text('Select Time'),
-            ),
+             
+            Row(
+                  children: [
+                    CustomActionButton(
+                      backgroundColor: blue,
+                      borderColor: Colors.transparent,
+                      label: 'Select Time',
+                      onTap: () =>   controller.selectTime(), // Call function to show time picker
+                      textColor: pink,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ), 
+                  
             Obx(() {
               // Use Obx widget to listen to changes in selected time
               final selectedTime = controller.selectedTime.value;
@@ -41,15 +50,16 @@ class BookingFieldView extends GetView<BookingFieldController> {
                     'Selected Time: ${selectedTime.hour}:${selectedTime.minute}',
                   )
                 : Container();
-            }),
+            }),],),
             const TimeRangePickerBuilder(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        label: const Text('Booking Field'),
-        icon: const Icon(Icons.add),
-        backgroundColor: blue,
+        label: const Text('Booking Field',style: TextStyle(color: lightBlue),),
+        icon: const Icon(Icons.ads_click_outlined),
+        
+        backgroundColor: green,
         onPressed: controller.handleSubmitBookingField,
       ),
     );

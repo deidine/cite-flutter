@@ -1,4 +1,6 @@
 import 'package:cite3/app/data/model/Register/register_request.dart';
+import 'package:cite3/app/data/model/user/user_response.dart';
+import 'package:cite3/app/data/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cite3/app/core/themes/custom_snackbar_theme.dart';
@@ -22,7 +24,13 @@ class LoginController extends GetxController with StateMixin {
     usernameController = TextEditingController();
     passwordController = TextEditingController();
   }
+ Future<UserResponse> getDataUser(String username) async {
+ UserResponse? dataUser;
 
+    print("data user function");
+    dataUser = await UserService.getUser(username);
+    return dataUser;
+  }
   void handleLogin() async {
     if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
       CustomSnackbar.failedSnackbar(
@@ -35,14 +43,24 @@ class LoginController extends GetxController with StateMixin {
     final inputtedUsername = usernameController.text;
     final inputtedPassword = passwordController.text;
 
-   
-
+      UserResponse cred =
+          await getDataUser(inputtedUsername);
     change(false, status: RxStatus.loading());
-    final isValid = await LoginService.login(inputtedUsername,inputtedPassword);
+    final isValid =
+        await LoginService.login(inputtedUsername, inputtedPassword);
     change(true, status: RxStatus.success());
 
-    if (isValid ?? false) {
-      Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
+    if (isValid ?? false) { 
+//     if (cred.role == "client") {
+//       //! get type if type==user then show user ui otherwise show doctor ui
+
+//            Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
+
+//     } else if (cred.role == "owner") {
+//            Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
+//  }
+           Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
+
       return;
     }
 

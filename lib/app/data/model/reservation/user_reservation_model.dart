@@ -1,5 +1,5 @@
 class UserReservation {
-  String transactionId;
+  int transactionId;
   String venueName;
   int venueId;
   int pricePerHour;

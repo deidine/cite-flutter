@@ -5,7 +5,7 @@ class UserResponse {
   String phoneNumber;
   String email;
   String image;
-
+String? role;
   UserResponse({
     required this.idUser,
     required this.name,
@@ -13,11 +13,13 @@ class UserResponse {
     required this.phoneNumber,
     required this.email,
     required this.image,
+    this.role
   });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) {
     return UserResponse(
       idUser: json['id'],
+      role: json['role'],
       name: json['name'],
       address: json['address'],
       phoneNumber: json['phoneNumber'],

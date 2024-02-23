@@ -37,10 +37,10 @@ class HomeView extends GetView<HomeController> {
               icon: Icon(Icons.history),
               label: 'History',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              label: 'Profile',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.account_circle),
+            //   label: 'Profile',
+            // ),
           ],
         ),
       ),

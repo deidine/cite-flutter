@@ -22,7 +22,7 @@ def booking_list(request):
         "hours": request.data.get('hours'),
         "bookingTime": request.data.get('bookingTime'),
         "totalPrice": request.data.get('totalPrice'),
-        "transactionId": 1,
+        # "transactionId": 1,
         "status":"invalid"
     } 
         

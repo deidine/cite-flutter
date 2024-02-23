@@ -1,3 +1,4 @@
+import 'package:cite3/app/global/drawer_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -15,6 +16,8 @@ class AllVenueView extends GetView<AllVenueController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customWhiteAppBar('Explore'),
+      drawer:GlobalDrawer(),
+
       body: controller.obx(
         (state) =>   SingleChildScrollView(
           physics: BouncingScrollPhysics(),

@@ -1,3 +1,4 @@
+import 'package:cite3/app/global/drawer_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,6 +14,8 @@ class HistoryBookingView extends GetView<HistoryBookingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:GlobalDrawer(),
+
       appBar: customWhiteAppBar('Booking History'),
       body: SmartRefresher(
         controller: controller.refreshController,

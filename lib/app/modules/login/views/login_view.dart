@@ -17,70 +17,79 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: Get.height * 0.15,
-              ),
-              Image.asset(heroLoginImage),
-              const SizedBox(
-                height: 30,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Login',
-                  style: headline4,
+        body: Stack(children: [
+      Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          // color: Colors.white,
+          child: Column(children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 35),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: Get.height * 0.15,
+                      ),
+                      Image.asset(heroLoginImage),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Login',
+                          style: headline4,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      CustomTextField(
+                        textStyle: headline6,
+                        isObscure: false,
+                        controller: controller.usernameController,
+                        label: 'Username',
+                        icon: Icons.person,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      CustomTextField(
+                        textStyle: headline6,
+                        isObscure: true,
+                        controller: controller.passwordController,
+                        label: 'Password',
+                        icon: Icons.lock,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      CustomMediumButton(
+                        color: blue,
+                        label: 'Login',
+                        onTap: controller.handleLogin,
+                      ),
+                      SizedBox(
+                        height: 50,
+                        child: controller.obx(
+                          (state) => const SizedBox.shrink(),
+                          onLoading: const LoadingSpinkit(),
+                        ),
+                      ),
+                      FooterText(
+                        label: 'Don\'t have an account? ',
+                        labelWithFunction: 'Join Us',
+                        ontap: () => Get.toNamed(Routes.REGISTER),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              CustomTextField(
-                textStyle: headline6,
-                isObscure: false,
-                controller: controller.usernameController,
-                label: 'Username',
-                icon: Icons.person,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomTextField(
-                textStyle: headline6,
-                isObscure: true,
-                controller: controller.passwordController,
-                label: 'Password',
-                icon: Icons.lock,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              CustomMediumButton(
-                color: blue,
-                label: 'Login',
-                onTap: controller.handleLogin,
-              ),
-              SizedBox(
-                height: 50,
-                child: controller.obx(
-                  (state) => const SizedBox.shrink(),
-                  onLoading: const LoadingSpinkit(),
-                ),
-              ),
-              FooterText(
-                label: 'Don\'t have an account? ',
-                labelWithFunction: 'Join Us',
-                ontap: () => Get.toNamed(Routes.REGISTER),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            )
+          ]))
+    ]));
   }
 }

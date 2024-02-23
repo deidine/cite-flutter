@@ -1,3 +1,4 @@
+import 'package:cite3/app/data/enum/role_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cite3/app/core/themes/custom_snackbar_theme.dart';
@@ -85,6 +86,7 @@ class RegisterController extends GetxController with StateMixin {
       email: email,
       username: username,
       password: password,
+      role:'client'
     );
 
     change(false, status: RxStatus.loading());
@@ -107,5 +109,16 @@ class RegisterController extends GetxController with StateMixin {
       title: 'Registration Failed',
       message: 'Username already exist',
     );
+  }
+    Rx<Role> role = Rx(Role.client); // Set a default role
+
+  late List<String> venues;
+ Rx<Role> selectedRole = Role.client.obs; // Initialize with default role
+
+  void updateFilteredRole(Role role) {
+    selectedRole.value = role;
+  }
+  void reloadScreen() {
+    update(); // This will force the screen to rebuild
   }
 }

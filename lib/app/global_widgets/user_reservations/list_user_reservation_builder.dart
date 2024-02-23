@@ -79,12 +79,12 @@ class ListUserReservationBuilder extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
+         
               Text(
                 'Schedule',
                 style: textfieldText.copyWith(
                   fontWeight: FontWeight.w600,
-                ),
-              ),
+                ),),
               const SizedBox(
                 height: 4,
               ),

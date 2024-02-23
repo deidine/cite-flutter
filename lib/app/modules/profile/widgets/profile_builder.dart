@@ -26,7 +26,13 @@ class ProfileBuilder extends GetView<ProfileController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // CircleAvatar(
+            
+            CircleAvatar(
+              radius: 100,
+              backgroundImage:AssetImage("assets/dp.jpg"),
+            ),
+
+               // CircleAvatar(
             //   radius: 100,
             //   backgroundImage: Image.memory(
             //     base64Decode(controller.userProfile.image),
@@ -58,11 +64,11 @@ class ProfileBuilder extends GetView<ProfileController> {
               width: double.infinity,
               height: Get.height * 0.1,
             ),
-            CustomMediumButton(
-              label: 'Logout',
-              onTap: () => Get.offAllNamed(Routes.LOGIN),
-              color: red,
-            ),
+            // CustomMediumButton(
+            //   label: 'Logout',
+            //   onTap: () => Get.offAllNamed(Routes.LOGIN),
+            //   color: red,
+            // ),
           ],
         ),
       ),

@@ -1,3 +1,5 @@
+import 'package:cite3/app/global/drawer_widget.dart';
+import 'package:cite3/app/global/drwer_list.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -15,6 +17,7 @@ class ActiveBookingView extends GetView<ActiveBookingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customWhiteAppBar('Booked Fields'),
+      drawer:GlobalDrawer(),
       body: SmartRefresher(
         controller: controller.refreshController,
         onRefresh: controller.handleRefresh,
@@ -31,7 +34,7 @@ class ActiveBookingView extends GetView<ActiveBookingController> {
                 ),
                 onLoading: const LoadingSpinkit(),
               ),
-            ),
+            ), 
           ],
         ),
       ),

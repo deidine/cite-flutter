@@ -17,7 +17,7 @@ const millisecondToHour = 3600000;
 class BookingFieldController extends GetxController {
   late final VenueResponse infoVenue;
   late final bool isEditReservation;
-  late final String transactionId;
+  late final int transactionId;
 
   final homeController = Get.find<HomeController>();
   final refreshController = RefreshController();
@@ -121,17 +121,24 @@ class BookingFieldController extends GetxController {
 // Format bookingTime
     final bookingTime = dateFormat.format(selectedDateTimeFromCalander);
 
-    final totalPrice = infoVenue.pricePerHour * userHours.length;
+    var totalPrice=0;
     int picked = 0;
     if (userHours.length == 3) {
       picked = 2;
     }
     if (userHours.length == 2) {
       picked = 1;
+
     }
     if (userHours.length == 1) {
       picked = 0;
+
     }
+    if(userHours[picked]==15){totalPrice = infoVenue.pricePerHour * 1;}
+    if(userHours[picked]==30){totalPrice = infoVenue.pricePerHour * 2;}
+    if(userHours[picked]==45){totalPrice = infoVenue.pricePerHour * 3;}
+    if(userHours[picked]==60){totalPrice = infoVenue.pricePerHour * 4;}
+    if(userHours[picked]==75){totalPrice = infoVenue.pricePerHour * 5;}
       final selectedTimeq = selectedTime.value;
 
   // Calculate end time by adding user selected hours to the selected time
@@ -155,7 +162,7 @@ class BookingFieldController extends GetxController {
     final dialogModel = DialogContentModel(
       venueName: infoVenue.venueName,
       pricePerHour: 'Rp. ${getFormattedPrice(infoVenue.pricePerHour)}',
-      totalHour: userHours.length.toString(),
+      totalHour: userHours[picked].toString(),
       totalPrice: 'Rp. ${getFormattedPrice(totalPrice)}',
       onConfirm: () {
         createReservationRequest(request);

@@ -53,11 +53,11 @@ void showOrderDialogSummary(DialogContentModel model) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total Hour: ',
+                'Total Min: ',
                 style: textfieldText.copyWith(fontSize: 15),
               ),
               Text(
-                '${model.totalHour} hour',
+                '${model.totalHour} min',
                 style: smallText,
               ),
             ],

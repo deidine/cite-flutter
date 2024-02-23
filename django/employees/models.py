@@ -2,6 +2,10 @@ from django.db import models
 
 # Create your models here.
 class EmployeeList(models.Model):
+    ROLES = (
+        ('owner', 'Owner'),
+        ('client', 'Client'),
+    )
     name=models.CharField(max_length=55)
     address=models.CharField(max_length=55)
     phoneNumber=models.CharField(max_length=55)
@@ -10,6 +14,8 @@ class EmployeeList(models.Model):
     password=models.CharField(max_length=235)
     # date_of_joining=models.DateField()
     # today=models.DateField(auto_now_add=True)
+    role = models.CharField(max_length=10, choices=ROLES)  # Add role field with choices
+
     image=models.ImageField(upload_to='images/',default='images/default.jpg')
     def __str__(self):
         return self.name

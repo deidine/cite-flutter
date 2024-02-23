@@ -18,7 +18,7 @@ class TimeRangePickerBuilder extends GetView<BookingFieldController> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Time',
+            'nombre du minute',
             style: mediumText.copyWith(color: blue),
           ),
         ),

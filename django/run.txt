@@ -1,0 +1,2 @@
+python manage.py runserver 192.168.139.215:8000
+flutter run --no-sound-null-safety

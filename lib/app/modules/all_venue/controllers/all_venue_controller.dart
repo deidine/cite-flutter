@@ -27,7 +27,7 @@ class AllVenueController extends GetxController with StateMixin {
     final arguments = {
       'infoVenue': venue,
       'isEditReservation': false,
-      'transactionId': '',
+      'transactionId': 0,
     };
 
     Get.toNamed(Routes.BOOKING_FIELD, arguments: arguments);

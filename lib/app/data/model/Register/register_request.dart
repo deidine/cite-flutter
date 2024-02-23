@@ -5,14 +5,15 @@ class RegisterRequest {
   final String? email;
   final String username;
   final String password;
-
+  final String role;
   RegisterRequest({
-     this.name,
-     this.address,
-     this.phoneNumber,
-     this.email,
+    this.name,
+    this.address,
+    this.phoneNumber,
+    this.email,
     required this.username,
-   required  this.password,
+    required this.password,
+    required this.role,
   });
 
   Map<String, dynamic> toJson() {
@@ -21,19 +22,20 @@ class RegisterRequest {
       'address': address,
       'phoneNumber': phoneNumber,
       'email': email,
+      'role': role,
       'username': username,
       'password': password,
     };
   }
 
-    factory RegisterRequest.fromJson(Map<String, dynamic> json) {
+  factory RegisterRequest.fromJson(Map<String, dynamic> json) {
     return RegisterRequest(
-      name: json['name'],
-      address: json['address'],
-      phoneNumber: json['phoneNumber'],
-      email: json['email'],
-      username: json['username'],
-      password: json['password']
-    );
+        name: json['name'],
+        role: json['role'],
+        address: json['address'],
+        phoneNumber: json['phoneNumber'],
+        email: json['email'],
+        username: json['username'],
+        password: json['password']);
   }
 }

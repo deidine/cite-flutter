@@ -20,7 +20,7 @@ class HeaderCategoryVenueBuilder extends GetView<AllVenueController> {
           children: [
             Expanded(
               child: Text(
-                controller.filteredVenues[0].category.toString(),
+                controller.filteredVenues![0].category.toString(),
                 style: smallText.copyWith(color: orange),
               ),
             ),
