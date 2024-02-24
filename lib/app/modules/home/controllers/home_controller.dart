@@ -33,7 +33,7 @@ class HomeController extends GetxController {
     const AllVenueView(),
     const ActiveBookingView(),
     const HistoryBookingView(),
-    const ProfileView(),
+    // const ProfileView(),
   ];
 
   void changePageBySlide(int index) {

@@ -79,7 +79,7 @@ class EditProfileController extends GetxController with StateMixin {
   }
 
   void initalizeValueOfController() {
-    temporaryImage = Image.memory(base64Decode(userProfile.image));
+    // temporaryImage = Image.memory(base64Decode(userProfile.image));
     nameController.value = TextEditingValue(text: userProfile.name);
     addressController.value = TextEditingValue(text: userProfile.address);
     phoneNumberController.value = TextEditingValue(

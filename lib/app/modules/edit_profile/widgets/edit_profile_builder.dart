@@ -45,30 +45,30 @@ class EditProfileBuilder extends GetView<EditProfileController> {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          Stack(
-            children: [
-              Obx(() {
-                if (controller.isImageChange.value) {
-                  return CircleImage(
-                    image: controller.temporaryImage.image,
-                    onTap: controller.pickImage,
-                  );
-                }
+          // Stack(
+          //   children: [
+          //     Obx(() {
+          //       if (controller.isImageChange.value) {
+          //         return CircleImage(
+          //           image: controller.temporaryImage.image,
+          //           onTap: controller.pickImage,
+          //         );
+          //       }
 
-                return CircleImage(
-                  image:
-                      Image.memory(base64Decode(controller.userProfile.image))
-                          .image,
-                  onTap: controller.pickImage,
-                );
-              }),
-              const EditIconOnCircleImage(
-                backgroundColor: blue,
-                icon: Icons.edit,
-                iconColor: Colors.white,
-              ),
-            ],
-          ),
+          //       return CircleImage(
+          //         image:
+          //             Image.memory(base64Decode(controller.userProfile.image))
+          //                 .image,
+          //         onTap: controller.pickImage,
+          //       );
+          //     }),
+          //     const EditIconOnCircleImage(
+          //       backgroundColor: blue,
+          //       icon: Icons.edit,
+          //       iconColor: Colors.white,
+          //     ),
+          //   ],
+          // ),
           const SizedBox(
             height: 15,
           ),

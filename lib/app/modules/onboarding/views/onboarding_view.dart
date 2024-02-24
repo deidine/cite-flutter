@@ -14,40 +14,29 @@ class OnboardingView extends GetView<OnboardingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(children: [
-      Container(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height,
-          color: Colors.white,
-          child: Column(children: [
-            Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 35),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 35),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(heroOnboardingImage),
-                          const SizedBox(
-                            width: double.infinity,
-                            height: 40,
-                          ),
-                          Text(
-                            onboardingText,
-                            style: headline4,
-                          ),
-                          SizedBox(
-                            height: Get.height * 0.15,
-                          ),
-                          OnBoardingButton(
-                            function: () => Get.offAndToNamed(Routes.LOGIN,
-                                arguments: false),
-                          ),
-                        ],
-                      ),
-                    ))),
-          ]))
-    ]));
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 35),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(heroOnboardingImage),
+            const SizedBox(
+              width: double.infinity,
+              height: 40,
+            ),
+            Text(
+              onboardingText,
+              style: headline4,
+            ),
+            SizedBox(
+              height: Get.height * 0.15,
+            ),
+            OnBoardingButton(
+              function: () => Get.offAndToNamed(Routes.LOGIN, arguments: false),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

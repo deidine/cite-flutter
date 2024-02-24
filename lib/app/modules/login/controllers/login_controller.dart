@@ -43,8 +43,8 @@ class LoginController extends GetxController with StateMixin {
     final inputtedUsername = usernameController.text;
     final inputtedPassword = passwordController.text;
 
-      UserResponse cred =
-          await getDataUser(inputtedUsername);
+      // UserResponse cred =
+      //     await getDataUser(inputtedUsername);
     change(false, status: RxStatus.loading());
     final isValid =
         await LoginService.login(inputtedUsername, inputtedPassword);
