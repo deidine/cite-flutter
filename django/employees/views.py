@@ -1,3 +1,4 @@
+from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 from .models import employee_exists
@@ -8,7 +9,7 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .serializers import EmployeeSerializer
+from .serializers import EmployeeSerializer,EmployeeSerializerUpdate
 
 from employees.forms import EmployeeForm
 from employees.models import EmployeeList
@@ -34,22 +35,22 @@ def delete(request,id):
         x.delete()
         return HttpResponseRedirect('/home')
     return HttpResponse("Item not deleted")
+# @csrf_exempt
+@api_view(['PUT'])
 
-@login_required(login_url='/login')
-def update(request,id):
-    if request.method=='GET':
-        x=EmployeeList.objects.get(id=id)
-        form=EmployeeForm(instance=x)
-        return render(request,'update.html',{'form':form})
-    if request.method=='POST':
-        x=EmployeeList.objects.get(id=id)
-        form=EmployeeForm(request.POST,request.FILES,instance=x)
-        if form.is_valid():
-            form.save()
-        return HttpResponseRedirect('/home')
+def update_employee(request, id): 
+    try:
+        employee = EmployeeList.objects.get(id=id)
+    except EmployeeList.DoesNotExist:
+        return JsonResponse({'error': 'Employee not found'}, status=status.HTTP_404_NOT_FOUND)
+     
+    serializer = EmployeeSerializerUpdate(employee, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse(serializer.data)
+    print(serializer.errors)
     
-
-
+    return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def create_employee(request):
@@ -58,8 +59,8 @@ def create_employee(request):
         print( request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def get_employee_list(request):
     employees = [
@@ -101,3 +102,12 @@ def login(request):
         return HttpResponse('Employee exists')
     else:
         return HttpResponse('Employee does not exist')
+    
+
+ 
+def get_csrf_token(request):
+    # Get the CSRF token from the request's cookies
+    csrf_token = request.COOKIES.get('csrftoken')
+    # Return the CSRF token in the response headers
+    response = JsonResponse({'csrf_token': csrf_token})
+    return response

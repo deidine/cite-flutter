@@ -1,3 +1,5 @@
+import 'package:cite3/app/global/drawer_widget.dart';
+import 'package:cite3/app/global_widgets/custom_white_appbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,7 +11,9 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
+            drawer:GlobalDrawer(),
+
       body: SafeArea(
         child: PageView.builder(
           controller: controller.pageController,

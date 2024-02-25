@@ -31,13 +31,63 @@ abstract class UserRepository {
     // final List<VenueResponse> data =response.body['data'];
   }
 
-  static Future<UserResponse> updateUser(UserRequest request) async {
+  static   updateUser(UserRequest request,int id) async {
     try {
-      var url = ApiProvider.updateUser;
-      final req = await getConnect.put(url, request.toJson());
-      return UserResponse.fromJson(req.body['data']);
+      var url = '${ApiProvider.updateUser}$id/';
+    String jsonData = json.encode(request);
+
+      await getConnect.put(url, jsonData);
+      
     } catch (e) {
       throw Exception('Failed to update data');
     }
+  }
+
+
+static Future<UserResponse> updateUser2(UserRequest request,int id) async {
+  try {
+    Uri url = Uri.parse('${ApiProvider.updateUser}$id/');
+    // String csrfToken = await fetchCSRFToken();
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      // 'X-CSRFToken': csrfToken,
+    };
+
+    String jsonData = json.encode(request);
+
+    http.Response response = await http.put(
+      url,
+      headers: headers,
+      body: jsonData,
+    );
+
+    if (response.statusCode == 200) {
+      // Successful update
+      print('Employee updated successfully');
+      return getUser(request.name);
+    } else {
+      // Error handling
+      print('Failed to update employee: ${response.body.replaceAll("\n", "")}');
+      return getUser(request.name);
+    }
+  } catch (e) {
+    // Exception handling
+    print('Failed to update data: $e');
+    throw Exception('Failed to update data: $e');
+  }
+}
+
+  static Future<String> fetchCSRFToken() async {
+    Uri url = Uri.parse('${ApiProvider.getCsrf}');
+
+    // Make a GET request to obtain the CSRF token
+    http.Response response = await http.get(url as Uri);
+
+    // Extract the CSRF token from the response headers
+    String csrfToken =
+        response.headers['Set-Cookie']!.split('; ')[0].split('=')[1];
+
+    return csrfToken;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cite3/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,7 +51,7 @@ class EditProfileController extends GetxController with StateMixin {
 
   void handleEditProfile() async {
     change(false, status: RxStatus.loading());
-
+// 
     final name = nameController.text;
     final address = addressController.text;
     final phoneNumber = phoneNumberController.text;
@@ -68,12 +69,15 @@ class EditProfileController extends GetxController with StateMixin {
       image: image,
     );
 
-    userProfile = await UserService.updateUser(request);
+     await UserService.updateUser(request);
 
     CustomSnackbar.successSnackbar(
       title: 'Success',
       message: 'Success edit profile',
     );
+    final homeController = Get.find<HomeController>();
+
+           Get.offAllNamed(Routes.HOME, arguments: homeController.username);
 
     change(true, status: RxStatus.success());
   }

@@ -1,0 +1,26 @@
+                                    إن شاء الله                                                
+documentation du mon todo :
+ ({} acteur)   (! important ) (? not sure about it) (# done) (~ dowing) (^ todo)  
+
+
+{owner} :
+^       crud venus  
+^       valide refuse le booking    
+^       manage le schedule of cite  
+^       login/signin    
+^       resvoir image du payment bankily    
+^       resvoir le notification du nouvelle booking 
+
+
+{user}  :
+
+#       voir les venus du cite  
+^!      localiser par le proche     
+#       faire/voir son booking   
+^?      annuler/edit  son booking       
+^       faire raiting pour le cite  
+^       voire le contact du owner   
+^!      resvoir le notification du status  booking  
+^!      payer uplode capture image bankily  
+~       login/signin 
+
