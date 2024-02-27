@@ -7,6 +7,7 @@ abstract class Routes {
   Routes._();
   // static const dock = _Paths.doc;
   static const HOME = _Paths.HOME;
+  static const HOMEOWNER = _Paths.HOMEOWNER;
   static const ONBOARDING = _Paths.ONBOARDING;
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
@@ -16,12 +17,16 @@ abstract class Routes {
   static const ALL_VENUE = _Paths.ALL_VENUE;
   static const ACTIVE_BOOKING = _Paths.ACTIVE_BOOKING;
   static const BOOKING_FIELD = _Paths.BOOKING_FIELD;
+  static const BOOKING_DETAIL = _Paths.BOOKING_DETAIL;
 }
 
 abstract class _Paths {
+  static const BOOKING_DETAIL='/bookDetail';
+
   _Paths._();
   // static const doc = '/dockter';
   static const HOME = '/home';
+  static const HOMEOWNER = '/homeOwner';
   static const ONBOARDING = '/onboarding';
   static const LOGIN = '/login';
   static const REGISTER = '/register';

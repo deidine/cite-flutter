@@ -1,6 +1,10 @@
 import 'dart:ui';
  
 import 'package:cite3/citte_owner/OwnerHomePage.dart';
+import 'package:cite3/citte_owner/all_booking/bindings/all_booking_binding.dart';
+import 'package:cite3/citte_owner/all_booking/views/booking_detail.dart';
+import 'package:cite3/citte_owner/owner_home/bindings/home_owner_binding.dart';
+import 'package:cite3/citte_owner/owner_home/views/home_owner_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/active_booking/bindings/active_booking_binding.dart';
@@ -36,6 +40,14 @@ class AppPages {
 
   static final routes = [
     GetPage(
+      name: _Paths.HOMEOWNER,
+      page: () => const HomeOwnerView(),
+      // binding: HomeBinding(),
+      bindings: [
+        HomeOwnerBinding(),
+        AllBookingBinding()
+      ],
+    ), GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),
       // binding: HomeBinding(),
@@ -95,6 +107,12 @@ class AppPages {
       name: _Paths.BOOKING_FIELD,
       page: () =>   BookingFieldView(),
       binding: BookingFieldBinding(),
+    ),
+   
+    GetPage(
+      name: _Paths.BOOKING_DETAIL,
+      page: () =>   BookingDetailView(),
+      binding: AllBookingBinding(),
     ),
   ];
 }

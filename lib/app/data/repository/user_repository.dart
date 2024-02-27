@@ -30,7 +30,26 @@ abstract class UserRepository {
     
     // final List<VenueResponse> data =response.body['data'];
   }
+    static Future<UserResponse> getUserById(int id) async {
+    Response<dynamic> req;
+       try {
+       var url = Uri.parse('${ApiProvider.getDetailUserById}$id/');
 
+      final response = await http.get(url, headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      });
+ 
+      var extractedData = json.decode(response.body);
+
+     return    UserResponse.fromJson(extractedData);
+      
+  } catch (e) {
+      throw Exception('Failed to fetch data');
+    }
+      // return UserResponse.fromJson(jsonDecode(data));
+    
+    // final List<VenueResponse> data =response.body['data'];
+  }
   static   updateUser(UserRequest request,int id) async {
     try {
       var url = '${ApiProvider.updateUser}$id/';

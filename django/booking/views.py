@@ -114,3 +114,44 @@ def get_booking(request,id):
     # return JsonResponse({'employees': employees})
     return JsonResponse(serializer.data, safe=False) 
 
+def get_booking_venue(request,venid):
+ 
+    list=Booking.objects.filter(venueId=venid)
+    serializer = BookingSerializer(list, many=True)
+
+    # return JsonResponse({'employees': employees})
+    return JsonResponse(serializer.data, safe=False) 
+
+
+
+@api_view(['PUT'])
+ 
+# @csrf_exempt
+def update_status(request, transaction):
+    try:
+        booking = Booking.objects.get(transactionId=transaction)
+    except Booking.DoesNotExist:
+        return JsonResponse({'error': 'Booking not found'}, status=status.HTTP_404_NOT_FOUND)
+     
+    if request.method == 'PUT':
+        print("deien") 
+        serializer = BookingSerializer(booking, data=request.data )
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        print(serializer.errors)
+        
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['DELETE'])
+def delete_booking(request, transaction):
+    try:
+        booking = Booking.objects.get(transactionId=transaction)
+    except Booking.DoesNotExist:
+        return JsonResponse({'error': 'Booking not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'DELETE':
+        booking.delete()
+        return JsonResponse({'message': 'Booking deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

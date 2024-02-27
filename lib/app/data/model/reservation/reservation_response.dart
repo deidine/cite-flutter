@@ -57,4 +57,17 @@ class ReservationResponse {
       'totalPrice': totalPrice,
     };
   }
+  
+  Map<String, dynamic> editStatusToJson() {
+    return {
+      'venueId': venueId,
+      'userId': userId,
+      'beginTime': beginTime,
+      'endTime': endTime,
+      'hours': hours,
+      'bookingTime': bookingTime,
+      'totalPrice': totalPrice,
+      'status': status,
+    };
+  }
 }

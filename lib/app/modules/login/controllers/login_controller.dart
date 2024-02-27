@@ -59,7 +59,7 @@ class LoginController extends GetxController with StateMixin {
 //     } else if (cred.role == "owner") {
 //            Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
 //  }
-           Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
+           Get.offAllNamed(Routes.HOMEOWNER, arguments: inputtedUsername);
 
       return;
     }

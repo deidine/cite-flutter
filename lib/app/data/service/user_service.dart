@@ -12,6 +12,15 @@ static Future<UserResponse> getUser(String username) async {
     throw Exception('Failed to get user: $e');
   }
 }
+static Future<UserResponse> getUserById(int id) async {
+  try {
+    return await UserRepository.getUserById(id);
+  } catch (e) {
+    // Handle the error properly
+    print('Failed to get user: $e');
+    throw Exception('Failed to get user: $e');
+  }
+}
 
 static updateUser(UserRequest request) async {
   try {
