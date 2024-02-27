@@ -1,12 +1,9 @@
-import 'package:cite3/app/data/model/venue/venue_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:cite3/app/core/themes/font_themes.dart';
 import 'package:cite3/app/core/values/colors.dart';
-import 'package:cite3/app/data/provider/dimens.dart';
 import 'package:cite3/app/helper/formatted_price.dart';
-import 'package:cite3/app/modules/active_booking/widgets/custom_action_button.dart';
 import 'package:cite3/citte_owner/all_booking/widgets/user_data.dart';
 
 import '../controllers/all_booking_controller.dart';

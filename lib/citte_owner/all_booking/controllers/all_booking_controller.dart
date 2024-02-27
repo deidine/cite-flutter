@@ -139,6 +139,8 @@ class AllBookingController extends GetxController with StateMixin {
     deleteBooking(request!.transactionId);
     change(true, status: RxStatus.success());
   }
+
+
   void deleteBooking(int? transactionId) async {
     change(false, status: RxStatus.loading());
     await BookingService.delete(transactionId!);

@@ -18,6 +18,10 @@ abstract class BookingService {
       int benueId) async {
     return await BookingRepository.getReservationListByVenueId(benueId);
   }
+   static Future<List<ReservationResponse>> searchReservationListByDate(
+      String date) async {
+    return await BookingRepository.sendSearchQuery(date);
+  }
 
   static Future<void> cancelReservation(String idTransaction) async {
     BookingRepository.cancelReservation(idTransaction);

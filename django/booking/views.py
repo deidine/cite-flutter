@@ -155,3 +155,26 @@ def delete_booking(request, transaction):
     if request.method == 'DELETE':
         booking.delete()
         return JsonResponse({'message': 'Booking deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
+
+ 
+# def search_bookings(request):
+def search_bookings(request):
+    # Get the search query (date) from the request data
+    search_date_str = request.POST.get('date', '')
+
+    # Parse the date string to a datetime object
+    try:
+        search_date = datetime.strptime(search_date_str, '%Y-%m-%d').date()
+    except ValueError:
+        return JsonResponse({'error': 'Invalid date format'}, status=400)
+
+    # Perform the search based on the date
+    # Filter bookings that have the same bookingTime as the search date
+    bookings = Booking.objects.filter(bookingTime=search_date)
+
+    # Serialize the search results
+    serializer = BookingSerializer(bookings, many=True)
+
+    # Return the serialized data as JSON response
+    return JsonResponse(serializer.data, safe=False)

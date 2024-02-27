@@ -228,5 +228,33 @@ abstract class BookingRepository {
       print('Error deleting booking: $error');
     }
   }
+ 
+
+
+static Future<List<ReservationResponse>> sendSearchQuery(String query) async {
+  // Replace 'your_backend_url' with your actual backend endpoint
+  String backendUrl = '${ApiProvider.searchBooking}';
+
+  try {
+    // Send the search query to your backend and await the response
+    http.Response response = await http.post(Uri.parse(backendUrl), body: {'query': query});
+    
+    // Check if the response status code is OK (200)
+    if (response.statusCode == 200) {
+      // Parse the response JSON into a list of ReservationResponse objects
+      List<dynamic> jsonData = json.decode(response.body);
+      List<ReservationResponse> reservations = jsonData.map((data) => ReservationResponse.fromJson(data)).toList();
+      
+      // Return the list of ReservationResponse objects
+      return reservations;
+    } else {
+      // If the response status code is not OK, throw an exception with the response status code
+      throw Exception('Failed to load data: ${response.statusCode}');
+    }
+  } catch (error) {
+    // If an error occurs during the request, throw an exception with the error message
+    throw Exception('Error sending search query: $error');
+  }
+}
 
 }

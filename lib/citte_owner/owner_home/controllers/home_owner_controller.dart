@@ -27,7 +27,7 @@ class HomeOwnerController extends GetxController {
   }
 
   List<Widget> pages = [
-    const AllBookingView(),
+      AllBookingView(),
     // const ActiveBookingView(),
     // const HistoryBookingView(),
     // const ProfileView(),
