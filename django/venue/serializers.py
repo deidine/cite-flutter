@@ -4,4 +4,4 @@ from .models import Venue
 class VenueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venue
-        fields = ('venueId', 'venueName', 'pricePerHour', 'location', 'category', 'rating', 'image')
+        fields = ( 'venueName', 'pricePerHour', 'location', 'category', 'rating', 'image')

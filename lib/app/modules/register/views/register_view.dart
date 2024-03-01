@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 import 'package:cite3/app/data/enum/role_enum.dart';
 import 'package:cite3/app/data/provider/dimens.dart';
-import 'package:cite3/app/global/get_image/getimage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -114,8 +113,8 @@ class RegisterView extends GetView<RegisterController> {
           // size:  MediaQuery.of(context).size.height * 0.1 * 0.05,
         ),
         onPressed: () async {
-          Uint8List dp = await getImage(ImageSource.gallery);
-          _imagedp = dp;
+          // Uint8List dp = await getImage(ImageSource.gallery);
+          // _imagedp = dp;
         },
       ),
     ),

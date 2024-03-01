@@ -12,16 +12,20 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const PROFILE = _Paths.PROFILE;
+  static const PROFILEOWNER = _Paths.PROFILEOWNER;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const HISTORY_BOOKING = _Paths.HISTORY_BOOKING;
   static const ALL_VENUE = _Paths.ALL_VENUE;
+  static const ADD_VENUE = _Paths.ADD_VENUE;
   static const ACTIVE_BOOKING = _Paths.ACTIVE_BOOKING;
   static const BOOKING_FIELD = _Paths.BOOKING_FIELD;
   static const BOOKING_DETAIL = _Paths.BOOKING_DETAIL;
+  static const ALL_VENUE_OWNER=_Paths.ALL_VENUE_OWNER;
 }
 
 abstract class _Paths {
   static const BOOKING_DETAIL='/bookDetail';
+
 
   _Paths._();
   // static const doc = '/dockter';
@@ -31,9 +35,13 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const PROFILE = '/profile';
+  static const PROFILEOWNER = '/profileOwner';
   static const EDIT_PROFILE = '/edit-profile';
   static const HISTORY_BOOKING = '/history-booking';
   static const ALL_VENUE = '/all-venue';
+  static const ALL_VENUE_OWNER = '/all-venue-owner';
   static const ACTIVE_BOOKING = '/active-booking';
   static const BOOKING_FIELD = '/booking-field';
+  static const ADD_VENUE = '/add-venue';
+
 }

@@ -31,6 +31,8 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_svg: ^2.0.10+1
   intl_phone_number_input: ^0.7.4
+  dio: ^5.4.1
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:

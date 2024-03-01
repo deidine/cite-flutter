@@ -1,10 +1,16 @@
 import 'dart:ui';
  
 import 'package:cite3/citte_owner/OwnerHomePage.dart';
+import 'package:cite3/citte_owner/add_venue/binding/add_venue_binding.dart';
+import 'package:cite3/citte_owner/add_venue/views/add_venue_view.dart';
 import 'package:cite3/citte_owner/all_booking/bindings/all_booking_binding.dart';
 import 'package:cite3/citte_owner/all_booking/views/booking_detail.dart';
+import 'package:cite3/citte_owner/all_venue/bindings/all_venue_binding.dart';
+import 'package:cite3/citte_owner/all_venue/views/all_venue_view.dart';
 import 'package:cite3/citte_owner/owner_home/bindings/home_owner_binding.dart';
+import 'package:cite3/citte_owner/profileOwner/views/profile_owner_view.dart';
 import 'package:cite3/citte_owner/owner_home/views/home_owner_view.dart';
+import 'package:cite3/citte_owner/profileOwner/bindings/profile_owner_binding.dart';
 import 'package:get/get.dart';
 
 import '../modules/active_booking/bindings/active_booking_binding.dart';
@@ -45,7 +51,11 @@ class AppPages {
       // binding: HomeBinding(),
       bindings: [
         HomeOwnerBinding(),
-        AllBookingBinding()
+        AllBookingBinding(),
+        ProfileOwnerBinding(),
+        AddVenueBinding(),
+        AllVenueOwnerBinding(),
+
       ],
     ), GetPage(
       name: _Paths.HOME,
@@ -83,6 +93,11 @@ class AppPages {
       page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
+     GetPage(
+      name: _Paths.PROFILEOWNER,
+      page: () => const ProfileOwnerView(),
+      binding: ProfileOwnerBinding(),
+    ),
     GetPage(
       name: _Paths.EDIT_PROFILE,
       page: () => const EditProfileView(),
@@ -94,9 +109,20 @@ class AppPages {
       binding: HistoryBookingBinding(),
     ),
     GetPage(
-      name: _Paths.ALL_VENUE,
-      page: () => const AllVenueView(),
+      name: _Paths.ALL_VENUE_OWNER,
+      page: () =>     const AllVenueView(),
+
       binding: AllVenueBinding(),
+    ),
+    GetPage(
+      name: _Paths.ALL_VENUE,
+      page: () => const AllOwnerVenueView(),
+      binding: AllVenueOwnerBinding(),
+    ),
+     GetPage(
+      name: _Paths.ADD_VENUE,
+      page: () =>   AddVenueView(),
+      binding: AddVenueBinding(),
     ),
     GetPage(
       name: _Paths.ACTIVE_BOOKING,

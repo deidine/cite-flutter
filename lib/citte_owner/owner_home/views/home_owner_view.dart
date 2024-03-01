@@ -1,5 +1,6 @@
 import 'package:cite3/app/global/drawer_widget.dart';
 import 'package:cite3/app/global_widgets/custom_white_appbar.dart';
+import 'package:cite3/citte_owner/global/drawer_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -11,9 +12,8 @@ class HomeOwnerView extends GetView<HomeOwnerController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
-            drawer:GlobalDrawer(),
-
+    return Scaffold(
+      drawer: GlobalDrawerOwner(),
       body: SafeArea(
         child: PageView.builder(
           controller: controller.pageController,
@@ -35,7 +35,7 @@ class HomeOwnerView extends GetView<HomeOwnerController> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month),
-              label: 'Active',
+              label: 'add venue',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),

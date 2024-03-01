@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cite3/app/core/values/colors.dart'; 
+import 'package:cite3/app/core/values/colors.dart';
+import 'package:cite3/app/modules/home/controllers/home_controller.dart'; 
 import 'package:cite3/app/modules/profile/controllers/profile_controller.dart';
 import 'package:cite3/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,12 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'drwer_list.dart';
 import 'text_widget.dart';
 
-class GlobalDrawer   extends GetView<ProfileController> {
+class GlobalDrawer   extends GetView<HomeController> {
     GlobalDrawer({super.key});
  
   double _turns = 0.0;
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
     return Drawer(
         child: Container(
       // color: blue,
@@ -67,7 +68,7 @@ class GlobalDrawer   extends GetView<ProfileController> {
                             //^ name
 
                             CustomText(
-                              title: controller.userProfile.email,
+                              title:   controller.dataUser!.email ,
                               size: 18.0,
                               color: blue,
                               weight: FontWeight.bold,
@@ -76,7 +77,7 @@ class GlobalDrawer   extends GetView<ProfileController> {
                             //^ email
 
                             CustomText(
-                              title: controller.userProfile.name,
+                              title:   controller.dataUser!.name ,
                               size: 14.0,
                               color: blue,
                             ),
@@ -117,7 +118,7 @@ class GlobalDrawer   extends GetView<ProfileController> {
                 // ^HOME
                 DrawerList(
                     icon: Icons.home_outlined, title: 'Home', onTap: () {
-                      Get.toNamed(Routes.HOME);
+                      Get.toNamed(Routes.HOMEOWNER);
                     }),
 
                 // ^Profile
@@ -125,7 +126,7 @@ class GlobalDrawer   extends GetView<ProfileController> {
                   icon: Icons.person_outline,
                   title: 'Profile',
                   onTap: () {
-                    Get.toNamed(Routes.PROFILE);
+                    Get.toNamed(Routes.PROFILEOWNER);
 
                   },
                 ),

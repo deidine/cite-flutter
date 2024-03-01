@@ -1,12 +1,11 @@
 import 'package:cite3/app/data/service/booking_service.dart';
+import 'package:cite3/citte_owner/global/drawer_widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:cite3/app/global/drawer_widget.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:cite3/app/global_widgets/custom_white_appbar.dart';
-import 'package:cite3/app/global_widgets/loading_spinkit.dart';
+ import 'package:cite3/app/global_widgets/loading_spinkit.dart';
 
 import '../controllers/all_booking_controller.dart';
 import '../widgets/all_booking_content_builder.dart';
@@ -42,7 +41,7 @@ class AllBookingView extends GetView<AllBookingController> {
           ),
         ],
       ),
-      drawer: GlobalDrawer(),
+      drawer: GlobalDrawerOwner(),
       body: SmartRefresher(
         controller: controller.refreshController,
         onRefresh: controller.handleRefresh,

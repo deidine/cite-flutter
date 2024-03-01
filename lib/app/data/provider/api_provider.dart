@@ -2,8 +2,7 @@ abstract class ApiProvider {
   static const _baseUrl = 'http://192.168.245.215:8000';
   // static const _baseUrl = 'https://1d26-193-146-150-220.ngrok-free.app';
 
-  static const register =
-      '$_baseUrl/home/create/';
+  static const register ='$_baseUrl/home/create/';
   static const login = '$_baseUrl/home/login/';
 
   static const getUsers = '$_baseUrl/home/api/employees/'; // {username}
@@ -27,6 +26,10 @@ abstract class ApiProvider {
   static const getScheduleExcludeTxId =
       '$_baseUrl/api/bookings/schedule'; // ??venue={venueId}&date={date}&txId={txId}
 
+  static const searchVenue = '$_baseUrl/venue/venues/search/'; // {venueId}
   static const getAllVenue = '$_baseUrl/venue/venues/';
   static const getDetailVenue = '$_baseUrl/venue/venues/'; // {venueId}
+  static const registerVenue ='$_baseUrl/venue/venues/create/';
+  static const registerVenue2 ='$_baseUrl/venue/venues/create/';
+
 }
