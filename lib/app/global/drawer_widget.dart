@@ -118,7 +118,7 @@ class GlobalDrawer   extends GetView<HomeController> {
                 // ^HOME
                 DrawerList(
                     icon: Icons.home_outlined, title: 'Home', onTap: () {
-                      Get.toNamed(Routes.HOMEOWNER);
+                      Get.toNamed(Routes.HOME);
                     }),
 
                 // ^Profile
@@ -126,7 +126,7 @@ class GlobalDrawer   extends GetView<HomeController> {
                   icon: Icons.person_outline,
                   title: 'Profile',
                   onTap: () {
-                    Get.toNamed(Routes.PROFILEOWNER);
+                    Get.toNamed(Routes.PROFILE );
 
                   },
                 ),

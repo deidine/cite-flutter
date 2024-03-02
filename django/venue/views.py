@@ -10,7 +10,7 @@ from rest_framework.response import Response
 @api_view(['GET'])
 def get_venue_list(request):
  
-    list=Venue.objects.all()
+    list=Venue.objects.filter( status='valid')
     serializer = VenueSerializer(list, many=True)
  
     return JsonResponse(serializer.data, safe=False) 

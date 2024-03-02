@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cite3/app/data/provider/api_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,14 +40,15 @@ class AllVenueContentBuilder extends GetView<AllVenueController> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(5),
-                      child: CachedNetworkImage(
-                        width: 150,
-                        fit: BoxFit.cover,
-                        imageUrl: controller.venues[index].image,
-                        placeholder: (context, url) => const SizedBox(
-                          width: 150,
-                        ),
-                      ),
+                      child:  ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Expanded(
+                          child: Image.network(
+                            width: 150,
+                            "${ApiProvider.imgVenue}${controller.venues![index].idVenue}/",
+                            fit: BoxFit.cover,
+                          ),
+                        )),
                     ),
                     const SizedBox(width: 10),
                     Column(

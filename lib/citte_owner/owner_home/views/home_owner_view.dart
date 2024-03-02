@@ -29,10 +29,10 @@ class HomeOwnerView extends GetView<HomeOwnerController> {
           currentIndex: controller.pageIndex.value,
           onTap: controller.changePage,
           items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.explore),
-              label: 'Home',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.explore),
+            //   label: 'Home',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(Icons.stadium),
               label: 'mon cite',

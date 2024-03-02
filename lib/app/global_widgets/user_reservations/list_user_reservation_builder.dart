@@ -1,4 +1,7 @@
+import 'package:cite3/app/data/provider/api_provider.dart';
+import 'package:cite3/app/modules/all_venue/controllers/all_venue_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../core/themes/font_themes.dart';
 import '../../data/model/reservation/user_reservation_model.dart';
@@ -18,13 +21,14 @@ class ListUserReservationBuilder extends StatelessWidget {
   final void Function(String)? cancelFunction;
   final void Function(UserReservation)? editFunction;
 
-  const ListUserReservationBuilder({
+    ListUserReservationBuilder({
     Key? key,
     required this.reservations,
     required this.isUsingCustomActionButton,
     this.editFunction,
     this.cancelFunction,
   }) : super(key: key);
+  final AllVenueController controller = Get.find<AllVenueController>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +57,16 @@ class ListUserReservationBuilder extends StatelessWidget {
             ),
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              UserReservationImageBuilder(url: reservations[index].imageLink),
+              ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Expanded(
+                          child: Image.network(
+                            width: 150,
+                            "${ApiProvider.imgVenue}${controller.venues![index].idVenue}/",
+                            fit: BoxFit.cover,
+                          ),
+                        )),
+              // UserReservationImageBuilder(url: reservations[index].imageLink),
               const SizedBox(
                 height: 8,
               ),

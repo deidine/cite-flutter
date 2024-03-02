@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:cite3/app/data/model/user/user_response.dart';
 import 'package:cite3/app/data/service/user_service.dart';
 import 'package:cite3/citte_owner/add_venue/views/add_venue_view.dart';
-import 'package:cite3/citte_owner/all_venue/views/all_venue_view.dart';
-import 'package:cite3/citte_owner/owner_home/views/use.dart';
+import 'package:cite3/citte_owner/all_venue/views/all_venue_view.dart'; 
 
 class HomeOwnerController extends GetxController {
   final String username = Get.arguments;
@@ -32,8 +31,7 @@ class HomeOwnerController extends GetxController {
   }
 
   List<Widget> pages = [
-    YourWidget(),
-    AllOwnerVenueView(),
+     AllOwnerVenueView(),
     AddVenueView(),
   ];
 
