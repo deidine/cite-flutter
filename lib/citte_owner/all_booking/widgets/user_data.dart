@@ -1,7 +1,7 @@
 import 'package:cite3/app/core/values/colors.dart';
 import 'package:cite3/app/data/model/reservation/user_reservation_model.dart';
 import 'package:cite3/app/global_widgets/user_reservations/single_play_hour_builder.dart';
-import 'package:cite3/app/modules/active_booking/widgets/custom_action_button.dart';
+import 'package:cite3/citte_owner/all_booking/widgets/custom_action_button.dart';
 import 'package:flutter/material.dart';
 
 class UserDataBuilder extends StatelessWidget {

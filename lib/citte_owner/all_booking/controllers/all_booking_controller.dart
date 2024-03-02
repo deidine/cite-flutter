@@ -12,6 +12,7 @@ import '../../owner_home/controllers/home_owner_controller.dart';
 
 class AllBookingController extends GetxController with StateMixin {
   final refreshController = RefreshController();
+  late final VenueResponse infoVenue;
 
   late List<VenueResponse> venues;
   late List<ReservationResponse> bookings;
@@ -20,14 +21,19 @@ class AllBookingController extends GetxController with StateMixin {
   // var bookings = <ReservationResponse>[].obs;
   late List<UserResponse> dataUsers;
   late final venuId;
+  late UserResponse user;
+
   @override
   void onInit() {
-    fetchData(1);
-
+     parsingArgument() ;
+    fetchData(); 
     super.onInit();
     print("deidine");
 
     fetchUserData();
+  }
+  void parsingArgument() {
+    infoVenue = Get.arguments['infoVenue']; 
   }
 
   UserResponse? getDetailUser(int id) {
@@ -76,9 +82,9 @@ class AllBookingController extends GetxController with StateMixin {
     change(true, status: RxStatus.success());
   }
 
-  Future<void> fetchData(int venuid) async {
+  Future<void> fetchData( ) async {
     change(false, status: RxStatus.loading());
-    bookings = await BookingService.getReservationListByVenueId(venuid);
+    bookings = await BookingService.getReservationListByVenueId(infoVenue.idVenue);
     change(true, status: RxStatus.success());
   }
 
@@ -131,7 +137,7 @@ class AllBookingController extends GetxController with StateMixin {
   }
 
   void handleDeleteBookingField() async {
-        change(false, status: RxStatus.loading());
+    change(false, status: RxStatus.loading());
 
     var request = getDetailBookingEdit();
     handleRefresh();
@@ -139,7 +145,6 @@ class AllBookingController extends GetxController with StateMixin {
     deleteBooking(request!.transactionId);
     change(true, status: RxStatus.success());
   }
-
 
   void deleteBooking(int? transactionId) async {
     change(false, status: RxStatus.loading());
@@ -154,7 +159,7 @@ class AllBookingController extends GetxController with StateMixin {
   void handleRefresh() async {
     refreshController.requestRefresh();
 
-    fetchData(1);
+    fetchData();
     fetchUserData();
 
     refreshController.refreshCompleted();

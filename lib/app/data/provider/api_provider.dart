@@ -31,5 +31,8 @@ abstract class ApiProvider {
   static const getDetailVenue = '$_baseUrl/venue/venues/'; // {venueId}
   static const registerVenue ='$_baseUrl/venue/venues/create/';
   static const registerVenue2 ='$_baseUrl/venue/venues/create/';
-
+  static const deleteVenue = '$_baseUrl/venue/venues/delete/'; // {venueId}
+  static const imgVenue = '$_baseUrl/venue/venues/img/'; // {venueId}
+  static const getAllVenueByUserId = '$_baseUrl/venue/venues/user/';
+ 
 }

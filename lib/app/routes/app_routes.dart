@@ -16,18 +16,20 @@ abstract class Routes {
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const HISTORY_BOOKING = _Paths.HISTORY_BOOKING;
   static const ALL_VENUE = _Paths.ALL_VENUE;
+  
   static const ADD_VENUE = _Paths.ADD_VENUE;
   static const ACTIVE_BOOKING = _Paths.ACTIVE_BOOKING;
   static const BOOKING_FIELD = _Paths.BOOKING_FIELD;
+  static const ALL_BOOKING_OWNER = _Paths.ALL_BOOKING_OWNER;
   static const BOOKING_DETAIL = _Paths.BOOKING_DETAIL;
   static const ALL_VENUE_OWNER=_Paths.ALL_VENUE_OWNER;
 }
 
 abstract class _Paths {
-  static const BOOKING_DETAIL='/bookDetail';
-
 
   _Paths._();
+  static const BOOKING_DETAIL='/bookDetail';
+  static const ALL_BOOKING_OWNER ='/all-booking-owner';
   // static const doc = '/dockter';
   static const HOME = '/home';
   static const HOMEOWNER = '/homeOwner';

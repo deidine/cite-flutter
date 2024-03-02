@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cite3/app/core/themes/font_themes.dart';
 import 'package:cite3/app/core/values/colors.dart';
+import 'package:cite3/app/data/provider/api_provider.dart';
 import 'package:cite3/app/helper/formatted_price.dart';
+import 'package:cite3/citte_owner/all_booking/widgets/custom_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
- 
+
 import '../controllers/all_venue_controller.dart';
 
 class AllVenueContentBuilder extends GetView<AllVenueOwnerController> {
@@ -27,10 +29,10 @@ class AllVenueContentBuilder extends GetView<AllVenueOwnerController> {
         ListView.builder(
           physics: const ScrollPhysics(),
           shrinkWrap: true,
-          itemCount: controller.venues.length,
+          itemCount: controller.venues!.length,
           itemBuilder: (context, index) => GestureDetector(
             onTap: () => controller.toBookingFieldPage(
-              controller.venues[index],
+              controller.venues![index],
             ),
             child: Card(
               child: Padding(
@@ -38,25 +40,25 @@ class AllVenueContentBuilder extends GetView<AllVenueOwnerController> {
                 child: Row(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: CachedNetworkImage(
-                        width: 150,
-                        fit: BoxFit.cover,
-                        imageUrl: controller.venues[index].image,
-                        placeholder: (context, url) => const SizedBox(
-                          width: 150,
-                        ),
-                      ),
-                    ),
+                        borderRadius: BorderRadius.circular(5),
+                        child: Expanded(
+                          child: Image.network(
+                            width: 150,
+                            "${ApiProvider.imgVenue}${controller.venues![index].idVenue}/",
+                            fit: BoxFit.cover,
+                          ),
+                        )),
                     const SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          controller.venues[index].venueName,
+                          controller.venues![index].venueName,
                           style: smallText,
                         ),
-                        Text( "${controller.venues[index].idVenue}",),
+                        Text(
+                          "${controller.venues![index].idVenue}",
+                        ),
                         const SizedBox(
                           height: 10,
                         ),
@@ -67,7 +69,7 @@ class AllVenueContentBuilder extends GetView<AllVenueOwnerController> {
                               color: blue,
                               size: 14,
                             ),
-                            Text(controller.venues[index].location)
+                            Text(controller.venues![index].location)
                           ],
                         ),
                         const SizedBox(
@@ -81,12 +83,23 @@ class AllVenueContentBuilder extends GetView<AllVenueOwnerController> {
                               size: 14,
                             ),
                             Text(
-                              'Rp. ${getFormattedPrice(controller.venues[index].pricePerHour)}',
+                              'Rp. ${getFormattedPrice(controller.venues![index].pricePerHour)}',
                               style: textfieldText.copyWith(
                                 fontWeight: FontWeight.w600,
                               ),
                             )
                           ],
+                        ),
+                        CustomActionButton(
+                          backgroundColor: Colors.red,
+                          borderColor: Colors.black,
+                          textColor: Colors.white,
+                          label: "delete",
+                          onTap: () {
+                            controller.deletedId =
+                                controller.venues![index].idVenue;
+                            controller.handleDeleteBookingField();
+                          },
                         ),
                       ],
                     ),

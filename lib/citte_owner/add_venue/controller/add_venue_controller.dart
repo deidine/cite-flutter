@@ -5,6 +5,7 @@ import 'package:cite3/app/core/themes/custom_snackbar_theme.dart';
 import 'package:cite3/app/data/model/venue/venue_resquest.dart';
 import 'package:cite3/app/data/service/venue_service.dart';
 import 'package:cite3/app/routes/app_pages.dart';
+import 'package:cite3/citte_owner/owner_home/controllers/home_owner_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,7 +17,7 @@ class AddVenueController extends GetxController with StateMixin {
   late final TextEditingController category;
   late final TextEditingController location;
   final refreshController = RefreshController();
-
+  final homeController = Get.find<HomeOwnerController>();
   bool starterForm = true;
   late bool proForm = true;
 
@@ -24,6 +25,7 @@ class AddVenueController extends GetxController with StateMixin {
 
   @override
   void onInit() {
+    homeController.dataUser!.idUser;
     initializeController();
     change(true, status: RxStatus.success());
     super.onInit();
@@ -39,6 +41,14 @@ class AddVenueController extends GetxController with StateMixin {
     pricePerHour = TextEditingController();
     category = TextEditingController();
     location = TextEditingController();
+    image = null; // Initialize image to null
+  }
+
+  void clear() {
+    venueName.text = '';
+    pricePerHour.text = '';
+    category.text = '';
+    location.text = '';
     image = null; // Initialize image to null
   }
 
@@ -72,32 +82,38 @@ class AddVenueController extends GetxController with StateMixin {
     }
 
     final request = VenueRequest(
+        userId: homeController.dataUser!.idUser,
         location: location.text,
         venueName: venueName.text,
         pricePerHour: int.parse(pricePerHour.text),
         category: category.text,
         rating: 0.1,
-        image: image!);
+        image: image!,
+        status: 'invalid');
 
     change(false, status: RxStatus.loading());
     final isSuccess = await VenueService.register(request);
+
     change(true, status: RxStatus.success());
 
     if (isSuccess) {
       CustomSnackbar.successSnackbar(
         title: 'Registration Success',
-        message: 'Redirecting to login page',
+        message: 'we will sheck your data and verify it ',
       );
-       Get.offNamed(Routes.ADD_VENUE ,arguments: true);
+      handleRefresh();
+      // clear();
+      // Get.back();
 
       Future.delayed(const Duration(seconds: 2), () {});
       return;
+    } else {
+      CustomSnackbar.failedSnackbar(
+        title: 'Registration Failed',
+        message: 'we can\'t insert your cite ',
+      );
     }
-
-    CustomSnackbar.failedSnackbar(
-      title: 'Registration Failed',
-      message: 'Username already exist',
-    );
+// clear() ;
   }
 
   void reloadScreen() {
@@ -107,8 +123,9 @@ class AddVenueController extends GetxController with StateMixin {
   void handleRefresh() async {
     refreshController.requestRefresh();
 
-    // fetchData(1);
-    // fetchUserData(); 
+    clear();
+    print("i am inisilasing");
+    reloadScreen();
     refreshController.refreshCompleted();
   }
 }

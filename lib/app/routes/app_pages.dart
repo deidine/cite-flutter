@@ -4,6 +4,7 @@ import 'package:cite3/citte_owner/OwnerHomePage.dart';
 import 'package:cite3/citte_owner/add_venue/binding/add_venue_binding.dart';
 import 'package:cite3/citte_owner/add_venue/views/add_venue_view.dart';
 import 'package:cite3/citte_owner/all_booking/bindings/all_booking_binding.dart';
+import 'package:cite3/citte_owner/all_booking/views/all_booking_view.dart';
 import 'package:cite3/citte_owner/all_booking/views/booking_detail.dart';
 import 'package:cite3/citte_owner/all_venue/bindings/all_venue_binding.dart';
 import 'package:cite3/citte_owner/all_venue/views/all_venue_view.dart';
@@ -51,7 +52,7 @@ class AppPages {
       // binding: HomeBinding(),
       bindings: [
         HomeOwnerBinding(),
-        AllBookingBinding(),
+        // AllBookingBinding(),
         ProfileOwnerBinding(),
         AddVenueBinding(),
         AllVenueOwnerBinding(),
@@ -138,6 +139,10 @@ class AppPages {
     GetPage(
       name: _Paths.BOOKING_DETAIL,
       page: () =>   BookingDetailView(),
+      binding: AllBookingBinding(),
+    ),GetPage(
+      name: _Paths.ALL_BOOKING_OWNER,
+      page: () =>   AllBookingView(),
       binding: AllBookingBinding(),
     ),
   ];

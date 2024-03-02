@@ -40,14 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'employees',
-    'accounts', 'venue',
+      'venue',
     'booking',
-        'student_stadium',
 
-    'staduim',
     'crispy_forms',
         'rest_framework',
-        'subStadium', 
     'crispy_bootstrap4'
 
 
@@ -92,7 +89,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DATABASES = { 'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cittea',
+        'NAME': 'citted',
         'USER': 'root',
         'PASSWORD': '',
         'HOST':'localhost',

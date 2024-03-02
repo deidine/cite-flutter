@@ -34,12 +34,12 @@ class HomeOwnerView extends GetView<HomeOwnerController> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month),
-              label: 'add venue',
+              icon: Icon(Icons.stadium),
+              label: 'mon cite',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'History',
+              icon: Icon(Icons.start_outlined),
+              label: 'add venue',
             ),
             // BottomNavigationBarItem(
             //   icon: Icon(Icons.account_circle),

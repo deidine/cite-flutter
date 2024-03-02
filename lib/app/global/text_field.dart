@@ -1,10 +1,12 @@
 import 'package:cite3/app/global/text_widget.dart';
+import 'package:cite3/citte_owner/add_venue/controller/add_venue_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import './colors.dart';
 
 class CheckoutFormWidget extends StatefulWidget {
-  const CheckoutFormWidget({
+    CheckoutFormWidget({
     Key? key,
     required this.width,
     required this.label,
@@ -27,6 +29,7 @@ class CheckoutFormWidget extends StatefulWidget {
   final bool? enabled;
   final String? errorText;
   final GestureDetector? suffixIcon; // Added suffixIcon parameter
+ AddVenueController controllerGetx = Get.find<AddVenueController>();
 
   @override
   State<CheckoutFormWidget> createState() => _CheckoutFormWidgetState();
@@ -56,7 +59,6 @@ class _CheckoutFormWidgetState extends State<CheckoutFormWidget> {
                     )
                   : const SizedBox(),
               // Display the suffix icon if provided
-              widget.suffixIcon ?? const SizedBox(),
             ],
           ),
         ),

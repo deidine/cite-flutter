@@ -31,6 +31,25 @@ abstract class VenueRepository {
     return getData;
   }
 
+    static Future<List<VenueResponse>> getVenuesByUser() async {
+    var url = Uri.parse(ApiProvider.getAllVenue);
+
+    final response = await http.get(url, headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    print("la reponse du venu${response}");
+
+    // final List<VenueResponse> data =response.body['data'];
+    List<VenueResponse> getData = [];
+    var _extractedData = json.decode(response.body) as List;
+    if (_extractedData == null) {}
+    getData = _extractedData
+        .map<VenueResponse>((json) => VenueResponse.fromJson(json))
+        .toList();
+    print("je suios od");
+    return getData;
+  }
+
   static Future<VenueResponse> getDetailVenue(String idVenue) async {
     final url = '${ApiProvider.getDetailVenue}$idVenue';
     final respose = await getConnect.get(url);
@@ -94,6 +113,48 @@ abstract class VenueRepository {
       return 400;
     }
   }
+
+
+  static delete(int id) async {
+    final url = '${ApiProvider.deleteVenue}$id/'; // Replace with your API endpoint
+
+    try {
+      final response = await http.delete(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        // Booking deleted successfully
+        print('Booking deleted');
+      } else {
+        // Error deleting booking
+        print('Failed to delete booking: ${response.statusCode}');
+      }
+    } catch (error) {
+      // Handle error
+      print('Error deleting booking: $error');
+    }
+  }
+ 
+
+    static Future<List<VenueResponse>> getVenuesByUserId(int id) async {
+    var url = Uri.parse("${ApiProvider.getAllVenueByUserId}$id/");
+
+    final response = await http.get(url, headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+    print("la reponse du venu${response}");
+
+    // final List<VenueResponse> data =response.body['data'];
+    List<VenueResponse> getData = [];
+    var _extractedData = json.decode(response.body) as List;
+    if (_extractedData == null) {}
+    getData = _extractedData
+        .map<VenueResponse>((json) => VenueResponse.fromJson(json))
+        .toList();
+    print("je suios od");
+    return getData;
+  }
+
+
 
 
   }
