@@ -12,10 +12,10 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AllpaymentOwnerController extends GetxController with StateMixin {
   late List<PaymentResponse>? payments = [];
+  var paymentsobs = <PaymentResponse>[].obs;
   final refreshController = RefreshController();
 
 late ReservationResponse infoBooking ;
-  var filteredpaymts = <PaymentResponse>[].obs;
   late final homeController = Get.find<HomeOwnerController>();
   late int? iduser;
   var deletedId;
@@ -65,6 +65,7 @@ late ReservationResponse infoBooking ;
   void fetchData() async {
     change(false, status: RxStatus.loading());
     payments = await PaymentService.getValidPaymByBookId( infoBooking.transactionId!);
+    paymentsobs.value=payments!;
     print("Got payments: $payments");
     change(true, status: RxStatus.success());
   }

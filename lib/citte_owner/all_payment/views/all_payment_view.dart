@@ -34,8 +34,8 @@ class AllOwnerpayment extends GetView<AllpaymentOwnerController> {
                         physics: BouncingScrollPhysics(),
                         child: Column(
                           children: [
-                            // ContentOfFilteredVenue(),
                             AllVenueContentBuilder(),
+                            ContentOfFilteredVenue(),
                           ],
                         ),
                       );

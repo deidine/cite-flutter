@@ -43,10 +43,10 @@ class AllVenueContentBuilder extends GetView<AllpaymentOwnerController> {
                     ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: Expanded(
-                          child: Image.network(
+                          child:CachedNetworkImage(
                             width: 150,
-                            "${ApiProvider.imgPaym}${controller.payments![index].pymId}/",
-                            fit: BoxFit.cover,
+                            
+                            fit: BoxFit.cover, imageUrl:"${ApiProvider.imgPaym}${controller.payments![index].pymId}/",
                           ),
                         )),
                     const SizedBox(width: 10),

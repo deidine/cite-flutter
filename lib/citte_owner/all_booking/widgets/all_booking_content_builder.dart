@@ -30,7 +30,7 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
           shrinkWrap: true,
           itemCount: controller.bookings.length,
           itemBuilder: (context, index) => GestureDetector(
-            onTap: () => controller.toBookingFieldPage(
+            onTap: () => controller.send(
                 controller.bookings[index].userId!, controller.bookings[index]),
             child: Card(
               shape: RoundedRectangleBorder(
@@ -50,7 +50,7 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
                         phoneNumber: controller
                             .getDetailUser(controller.bookings[index].userId!)!
                             .phoneNumber,
-                        status: controller.bookings[index].status!, 
+                        status: controller.bookings[index].status!,
                       ),
                     ),
                     SizedBox(width: screenWidth * 0.04),
@@ -106,23 +106,25 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
                               ),
                             ],
                           ),
+                          ElevatedButton(
+                            onPressed: () {
+                              // Get.toNamed(Routes.BOOKING_DETAIL, arguments: arguments);
+                              controller.toBookingFieldPage(
+                                  controller.bookings[index].userId!,
+                                  controller.bookings[index]);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: green, // Background color
+                              onPrimary: Colors.white, // Text color
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(30), // Border radius
+                              ),
+                            ),
+                            child: Text('Voire Payment'),
+                          ),
                         ],
                       ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Get.toNamed(Routes.BOOKING_DETAIL, arguments: arguments);
-                        controller.send(controller.bookings[index].userId!,
-                            controller.bookings[index]);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: green, // Background color
-                        onPrimary: Colors.white, // Text color
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30), // Border radius
-                        ),
-                      ),
-                      child: Text('Press Me'),
                     ),
                   ],
                 ),

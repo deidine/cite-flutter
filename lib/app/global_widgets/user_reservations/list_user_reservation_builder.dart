@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cite3/app/data/provider/api_provider.dart';
 import 'package:cite3/app/modules/all_venue/controllers/all_venue_controller.dart';
 import 'package:flutter/material.dart';
@@ -60,9 +61,9 @@ class ListUserReservationBuilder extends StatelessWidget {
               ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: Expanded(
-                          child: Image.network(
+                          child:CachedNetworkImage(
                             width: 150,
-                            "${ApiProvider.imgVenue}${controller.venues![index].idVenue}/",
+                          imageUrl:  "${ApiProvider.imgVenue}${controller.venues![index].idVenue}/",
                             fit: BoxFit.cover,
                           ),
                         )),

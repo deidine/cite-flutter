@@ -1,6 +1,6 @@
 import 'package:cite3/app/data/model/user/user_response.dart';
 import 'package:cite3/citte_owner/all_booking/controllers/all_booking_controller.dart';
-import 'package:cite3/citte_owner/all_booking/widgets/user_data.dart';
+import 'package:cite3/citte_owner/all_booking/widgets/user_data_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -20,10 +20,11 @@ class BookingDetailView extends GetView<AllBookingController> {
             SizedBox(width: 14),
             Expanded(
               flex: 2,
-              child: UserDataBuilder(
+              child: UserDataDetailBuilder(
                 email: controller.getDetailUserEdit()!.email,
                 phoneNumber: controller.getDetailUserEdit()!.phoneNumber,
-                status: controller.getDetailBookingEdit()!.status!,
+                status:  controller.getDetailBookingEdit()!.status == 'valid' ? 'invalid' : 'valid',
+                onTap:  controller.handleSubmitBookingField,
               ),
             ),
             Text(
@@ -45,20 +46,7 @@ class BookingDetailView extends GetView<AllBookingController> {
       //   backgroundColor: green,
       //   onPressed: controller.handleSubmitBookingField,
       // ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FloatingActionButton.extended(
-            label: const Text(
-              'Edit Booking',
-              style: TextStyle(color: Colors.green),
-            ),
-            icon: const Icon(Icons.edit, color: Colors.green),
-            backgroundColor: Colors.yellow,
-            onPressed: controller.handleSubmitBookingField,
-          ),
-          SizedBox(width: 16), // Add some space between the FABs
+      floatingActionButton:// Add some space between the FABs
           FloatingActionButton.extended(
             label: const Text(
               'Delete Booking',
@@ -68,8 +56,7 @@ class BookingDetailView extends GetView<AllBookingController> {
             backgroundColor: red,
             onPressed: controller.handleDeleteBookingField,
           ),
-        ],
-      ),
+        
     );
   }
 }

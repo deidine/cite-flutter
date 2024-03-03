@@ -43,9 +43,9 @@ class AllVenueContentBuilder extends GetView<AllVenueController> {
                       child:  ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: Expanded(
-                          child: Image.network(
+                          child: CachedNetworkImage(
                             width: 150,
-                            "${ApiProvider.imgVenue}${controller.venues![index].idVenue}/",
+                          imageUrl:  "${ApiProvider.imgVenue}${controller.venues![index].idVenue}/",
                             fit: BoxFit.cover,
                           ),
                         )),
