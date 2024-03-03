@@ -1,3 +1,4 @@
+import 'package:cite3/app/modules/payment/views/payment_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -32,7 +33,7 @@ class ActiveBookingController extends GetxController with StateMixin {
     super.onReady();
   }
 
-  void handleEditReservation(UserReservation reservation) {
+  void handlePaymentReservation(UserReservation reservation) {
     // venue response
     final VenueResponse infoVenue = VenueResponse(
       idVenue: reservation.venueId,
@@ -49,11 +50,14 @@ class ActiveBookingController extends GetxController with StateMixin {
 
     final arguments = {
       'infoVenue': infoVenue,
-      'isEditReservation': true,
+      'isPaymentReservation': true,
       'transactionId': idTx,
     };
+print("deidine payment");
 
-    Get.toNamed(Routes.BOOKING_FIELD, arguments: arguments);
+// Get.to(() => PaymentView(), arguments: arguments);
+
+    Get.toNamed(Routes.PAYMENT , arguments: arguments);
   }
 
   void handleCancelReservation(String transactionId) {
@@ -116,11 +120,11 @@ class ActiveBookingController extends GetxController with StateMixin {
     return null;
   }
 
-  void firstTimeFetchData() async {
+  void firstTimeFetchData()   {
     change(false, status: RxStatus.loading());
 
-    final username = homeController.username;
-    dataUser = await UserService.getUser(username);
+    dataUser      =  homeController.dataUser!;
+
     fetchData().then((_) {
       updateBookedFields();
       change(true, status: RxStatus.success());

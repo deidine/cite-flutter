@@ -29,7 +29,7 @@ class ActiveBookingView extends GetView<ActiveBookingController> {
                 (state) => ListUserReservationBuilder(
                   reservations: controller.bookedFieldsModel,
                   isUsingCustomActionButton: true,
-                  editFunction: controller.handleEditReservation,
+                  paymentFunction: controller.handlePaymentReservation,
                   cancelFunction: controller.handleCancelReservation,
                 ),
                 onLoading: const LoadingSpinkit(),

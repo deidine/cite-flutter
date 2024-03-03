@@ -20,7 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls), 
     path('venue/',include('venue.urls')),
     path('home/',include('employees.urls')),
-    path('',include('booking.urls'))
+    path('',include('booking.urls')),
+    path('',include('payment.urls'))
     
 ]
  

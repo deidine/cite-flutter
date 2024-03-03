@@ -13,37 +13,43 @@ import '../widgets/content_category_filter.dart';
 
 class AllOwnerVenueView extends GetView<AllVenueOwnerController> {
   const AllOwnerVenueView({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customWhiteAppBar('Explore'),
-        drawer: GlobalDrawerOwner(),
-        body: SmartRefresher(
-            controller: controller.refreshController,
-            onRefresh: controller.handleRefresh,
-            child: ListView(physics: const BouncingScrollPhysics(), children: [
-              Center(
-                child: controller.obx(
-                  (state) {
-                    if (controller.venues!.isEmpty) {
-                      return Center(
-                        child: Text('No venues available'),
-                      );
-                    } else {
-                      return const SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            // ContentOfFilteredVenue(),
-                            AllVenueContentBuilder(),
-                          ],
-                        ),
-                      );
-                    }
-                  },
-                  onLoading: const LoadingSpinkit(),
-                ),
-              )
-            ])));
+      appBar: customWhiteAppBar('Explore'),
+      drawer: GlobalDrawerOwner(),
+      body: SmartRefresher(
+        controller: controller.refreshController,
+        onRefresh: controller.handleRefresh,
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: [
+            Center(
+              child: controller.obx(
+                (state) {
+                  if (controller.homeController != null && controller.homeController!.dataUser != null) {
+                    return const SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          // ContentOfFilteredVenue(),
+                          AllVenueContentBuilder(),
+                        ],
+                      ),
+                    );
+                  } else {
+                    // Handle the case where homeController or dataUser is null
+                    // For example, show a loading indicator or an error message
+                    return const LoadingSpinkit();
+                  }
+                },
+                onLoading: const LoadingSpinkit(),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

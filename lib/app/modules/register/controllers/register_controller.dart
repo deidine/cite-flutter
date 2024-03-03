@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cite3/app/data/enum/role_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +15,7 @@ class RegisterController extends GetxController with StateMixin {
   late final TextEditingController emailController;
   late final TextEditingController usernameController;
   late final TextEditingController passwordController;
+  late File? image;
 
   @override
   void onInit() {
@@ -21,6 +24,15 @@ class RegisterController extends GetxController with StateMixin {
     change(true, status: RxStatus.success());
 
     super.onInit();
+  }
+late Rx<Role> selectedRole = Role.client.obs; // Initialize with default role
+
+void updateFilteredRole(Role role) {
+  selectedRole.value = role;
+}
+  void setImage(File? pickedImage) {
+    image = pickedImage;
+    update(); // Notify the UI to rebuild
   }
 
   void initializeController() {
@@ -86,7 +98,8 @@ class RegisterController extends GetxController with StateMixin {
       email: email,
       username: username,
       password: password,
-      role:'client'
+      // role:'client'
+       role: selectedRole.value.toString().split('.').last,
     );
 
     change(false, status: RxStatus.loading());
@@ -113,11 +126,7 @@ class RegisterController extends GetxController with StateMixin {
     Rx<Role> role = Rx(Role.client); // Set a default role
 
   late List<String> venues;
- Rx<Role> selectedRole = Role.client.obs; // Initialize with default role
-
-  void updateFilteredRole(Role role) {
-    selectedRole.value = role;
-  }
+ 
   void reloadScreen() {
     update(); // This will force the screen to rebuild
   }

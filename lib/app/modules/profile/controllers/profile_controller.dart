@@ -18,14 +18,14 @@ class ProfileController extends GetxController with StateMixin {
 
   Future<void> refreshProfile() async {
     change(false, status: RxStatus.loading());
-    userProfile = await UserService.getUser(homeController.username);
+    userProfile =  homeController.dataUser!;
     change(true, status: RxStatus.success());
   }
 
-  void intializeUserProfile() async {
+  void intializeUserProfile()   {
     change(false, status: RxStatus.loading());
 
-    userProfile = await UserService.getUser(homeController.username);
+    userProfile =  homeController.dataUser!;
 
     change(true, status: RxStatus.success());
   }

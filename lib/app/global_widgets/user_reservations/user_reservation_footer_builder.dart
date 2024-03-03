@@ -11,7 +11,7 @@ class UserReservationFooterBuilder extends StatelessWidget {
     required this.hours,
     required this.reservation,
     required this.isUsingCustomActionButton,
-    this.editFunction,
+    this.paymentFunction,
     this.cancelFunction,
     required this.transactionId,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class UserReservationFooterBuilder extends StatelessWidget {
   final int hours;
   final bool isUsingCustomActionButton;
   final void Function(String)? cancelFunction;
-  final void Function(UserReservation)? editFunction;
+  final void Function(UserReservation)? paymentFunction;
   final int transactionId;
   final UserReservation reservation;
 
@@ -44,8 +44,8 @@ class UserReservationFooterBuilder extends StatelessWidget {
                     CustomActionButton(
                       backgroundColor: green,
                       borderColor: Colors.transparent,
-                      label: 'Edit',
-                      onTap: () => editFunction!(
+                      label: 'Payer',
+                      onTap: () => paymentFunction!(
                         reservation,
                       ),
                       textColor: Colors.white,

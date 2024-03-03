@@ -18,14 +18,14 @@ print("deidine$userProfile");
 
   Future<void> refreshProfile() async {
     change(false, status: RxStatus.loading());
-    userProfile = await UserService.getUser(homeController.username);
+    userProfile = await UserService.getUser(homeController.username!);
     change(true, status: RxStatus.success());
   }
 
   void intializeUserProfile() async {
     change(false, status: RxStatus.loading());
 
-    userProfile = await UserService.getUser(homeController.username);
+    userProfile =  homeController.dataUser!;
 
     change(true, status: RxStatus.success());
   }

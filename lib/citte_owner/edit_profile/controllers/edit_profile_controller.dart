@@ -102,7 +102,7 @@ class EditProfileOwnerController extends GetxController with StateMixin {
     change(false, status: RxStatus.loading());
 
     final homeController = Get.find<HomeOwnerController>();
-    userProfile = await UserService.getUser(homeController.username);
+    userProfile =  homeController.dataUser!;
 
     initializeController();
     initalizeValueOfController();

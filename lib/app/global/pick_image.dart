@@ -12,6 +12,7 @@ class PhotoSelectionResult {
 Future<PhotoSelectionResult> selectPhoto() async {
   final picker = ImagePicker();
   final pickedFile = await picker.pickImage(
+    // source: ImageSource.camera,
     source: ImageSource.gallery,
     imageQuality: 80,
   );
@@ -28,7 +29,7 @@ Future<PhotoSelectionResult> selectPhoto() async {
     // Change the file name
     final newFileName = '$randomNumber.$fileExtension';
 
-    result = PhotoSelectionResult('freelance$newFileName', pickedFile.path);
+    result = PhotoSelectionResult('cite$newFileName', pickedFile.path);
   } else {
     // Default values if no file was picked
     result = PhotoSelectionResult('', '');

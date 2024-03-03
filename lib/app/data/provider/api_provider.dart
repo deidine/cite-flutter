@@ -35,4 +35,13 @@ abstract class ApiProvider {
   static const imgVenue = '$_baseUrl/venue/venues/img/'; // {venueId}
   static const getAllVenueByUserId = '$_baseUrl/venue/venues/user/';
  
+
+
+  
+  static const getDetailPaym = '$_baseUrl/api/payment/'; // {venueId}
+  static const registerPaym ='$_baseUrl/api/payment/create/';
+  static const deletePaym = '$_baseUrl/api/payment/delete/'; // {venueId}
+  static const imgPaym = '$_baseUrl/api/payment/img/'; // {venueId}
+  static const getAllPaymByUserId = '$_baseUrl/api/payment/booking_invalid/';
+ 
 }

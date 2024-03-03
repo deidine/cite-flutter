@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class RegisterRequest {
   final String? name;
   final String? address;
@@ -6,6 +8,7 @@ class RegisterRequest {
   final String username;
   final String password;
   final String role;
+  final File? image;
   RegisterRequest({
     this.name,
     this.address,
@@ -14,14 +17,15 @@ class RegisterRequest {
     required this.username,
     required this.password,
     required this.role,
+      this.image,
   });
 
-  Map<String, dynamic> toJson() {
+  Map<String, String> toJson() {
     return {
-      'name': name,
-      'address': address,
-      'phoneNumber': phoneNumber,
-      'email': email,
+      'name': name!,
+      'address': address!,
+      'phoneNumber': phoneNumber!,
+      'email': email!,
       'role': role,
       'username': username,
       'password': password,

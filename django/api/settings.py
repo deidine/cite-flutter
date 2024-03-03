@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'employees',
       'venue',
     'booking',
-
+'payment',
     'crispy_forms',
         'rest_framework',
     'crispy_bootstrap4'
@@ -89,7 +89,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DATABASES = { 'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'citted',
+        'NAME': 'cittee',
         'USER': 'root',
         'PASSWORD': '',
         'HOST':'localhost',

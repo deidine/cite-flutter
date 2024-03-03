@@ -42,8 +42,8 @@ class HomeOwnerView extends GetView<HomeOwnerController> {
               label: 'add venue',
             ),
             // BottomNavigationBarItem(
-            //   icon: Icon(Icons.account_circle),
-            //   label: 'Profile',
+            //   icon: Icon(Icons.wallet),
+            //   label: 'payment',
             // ),
           ],
         ),

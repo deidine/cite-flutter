@@ -18,11 +18,13 @@ abstract class Routes {
   static const ALL_VENUE = _Paths.ALL_VENUE;
   
   static const ADD_VENUE = _Paths.ADD_VENUE;
+  static const PAYMENT = _Paths.PAYMENT;
   static const ACTIVE_BOOKING = _Paths.ACTIVE_BOOKING;
   static const BOOKING_FIELD = _Paths.BOOKING_FIELD;
   static const ALL_BOOKING_OWNER = _Paths.ALL_BOOKING_OWNER;
   static const BOOKING_DETAIL = _Paths.BOOKING_DETAIL;
   static const ALL_VENUE_OWNER=_Paths.ALL_VENUE_OWNER;
+    static const ALL_PAYMENT=_Paths.ALLPAYMENT;
 }
 
 abstract class _Paths {
@@ -45,5 +47,7 @@ abstract class _Paths {
   static const ACTIVE_BOOKING = '/active-booking';
   static const BOOKING_FIELD = '/booking-field';
   static const ADD_VENUE = '/add-venue';
+  static const PAYMENT = '/payment';
+  static const ALLPAYMENT = '/allPayment';
 
 }

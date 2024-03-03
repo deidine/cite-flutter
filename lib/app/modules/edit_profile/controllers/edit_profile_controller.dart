@@ -99,11 +99,11 @@ class EditProfileController extends GetxController with StateMixin {
     emailController = TextEditingController();
   }
 
-  void initializeUserProfile() async {
+  void initializeUserProfile() {
     change(false, status: RxStatus.loading());
 
     final homeController = Get.find<HomeController>();
-    userProfile = await UserService.getUser(homeController.username);
+    userProfile =  homeController.dataUser!;
 
     initializeController();
     initalizeValueOfController();

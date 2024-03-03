@@ -19,13 +19,13 @@ class ListUserReservationBuilder extends StatelessWidget {
   final bool isUsingCustomActionButton;
 
   final void Function(String)? cancelFunction;
-  final void Function(UserReservation)? editFunction;
+  final void Function(UserReservation)? paymentFunction;
 
     ListUserReservationBuilder({
     Key? key,
     required this.reservations,
     required this.isUsingCustomActionButton,
-    this.editFunction,
+    this.paymentFunction,
     this.cancelFunction,
   }) : super(key: key);
   final AllVenueController controller = Get.find<AllVenueController>();
@@ -120,7 +120,7 @@ class ListUserReservationBuilder extends StatelessWidget {
                 transactionId: reservations[index].transactionId,
                 reservation: reservations[index],
                 cancelFunction: cancelFunction,
-                editFunction: editFunction,
+                paymentFunction: paymentFunction,
               ),
             ],
           ),

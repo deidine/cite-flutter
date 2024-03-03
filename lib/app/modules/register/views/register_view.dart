@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:cite3/app/global/pick_image.dart';
 import 'dart:typed_data';
 import 'package:cite3/app/data/enum/role_enum.dart';
 import 'package:cite3/app/data/provider/dimens.dart';
@@ -91,36 +93,40 @@ class RegisterView extends GetView<RegisterController> {
                 style: headline4,
               ),
             ),
-           Stack(
-  children: [
-    _imagedp != null
-      ? CircleAvatar(
-          backgroundImage: MemoryImage(_imagedp!),
-          radius: MediaQuery.of(context).size.height * 0.1,
-        )
-      : CircleAvatar(
-          backgroundImage: const AssetImage("assets/dp.jpg"),
-          // If you don't want to set radius when image is not available, you can remove it
-          radius: 50,
-        ),
-    Positioned(
-      bottom: MediaQuery.of(context).size.height * 0.1 * 0.01,
-      right: MediaQuery.of(context).size.height * 0.1 * 0.02,
-      child: IconButton(
-        icon: const Icon(
-          Icons.add_a_photo,
-          size:40
-          // size:  MediaQuery.of(context).size.height * 0.1 * 0.05,
-        ),
-        onPressed: () async {
-          // Uint8List dp = await getImage(ImageSource.gallery);
-          // _imagedp = dp;
-        },
-      ),
-    ),
-  ],
-),
+            Stack(
+              children: [
+                controller.image != null
+                    ? CircleAvatar(
+                        backgroundImage: FileImage(
+                          File(controller.image!.path),
+                        ),
+                        radius: MediaQuery.of(context).size.height * 0.1,
+                      )
+                    : CircleAvatar(
+                        backgroundImage: const AssetImage("assets/dp.jpg"),
+                        // If you don't want to set radius when image is not available, you can remove it
+                        radius: 50,
+                      ),
+                Positioned(
+                  bottom: MediaQuery.of(context).size.height * 0.1 * 0.01,
+                  right: MediaQuery.of(context).size.height * 0.1 * 0.02,
+                  child: IconButton(
+                    icon: const Icon(Icons.add_a_photo, size: 40
+                        // size:  MediaQuery.of(context).size.height * 0.1 * 0.05,
+                        ),
+                    onPressed: () async {
+                      final result = await selectPhoto();
+                      File? imageFile = File(result.filePath);
 
+                      controller.image = imageFile;
+                      controller.update();
+
+                      controller.setImage(imageFile);
+                    },
+                  ),
+                ),
+              ],
+            ),
             DropdownButton<String>(
                 autofocus: true,
                 focusColor: Colors.grey.shade200,
@@ -135,23 +141,21 @@ class RegisterView extends GetView<RegisterController> {
                 onChanged: (String? value) {
                   dropDownvalue = value;
                 }),
-            PopupMenuButton<Role>(
-                icon: const Icon(
-                  Icons.expand_more,
-                ),
-                onSelected: (Role selectedRole) {
-                  controller.role.value = selectedRole;
-                },
-                itemBuilder: (context) => <PopupMenuItem<Role>>[
-                      const PopupMenuItem<Role>(
-                        value: Role.client,
-                        child: Text('client'),
-                      ),
-                      const PopupMenuItem<Role>(
-                        value: Role.owner,
-                        child: Text('owner'),
-                      ),
-                    ]),
+         DropdownButton<Role>(
+  value: controller.selectedRole.value,
+  onChanged: (Role? value) {
+    if (value != null) {
+      controller.updateFilteredRole(value);
+    }
+  },
+  items: Role.values.map((Role role) {
+    return DropdownMenuItem<Role>(
+      value: role,
+      child: Text(role.toString().split('.').last), // Display role name
+    );
+  }).toList(),
+),
+
             Text("deidien ${controller.selectedRole.value.toString()}"),
             const SizedBox(
               height: 20,

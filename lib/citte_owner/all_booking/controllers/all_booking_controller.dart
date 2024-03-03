@@ -66,7 +66,8 @@ class AllBookingController extends GetxController with StateMixin {
       'infoBooking': bookings,
       'userId': userId,
     };
-    Get.toNamed(Routes.BOOKING_DETAIL, arguments: arguments);
+    Get.toNamed(Routes.ALL_PAYMENT, arguments: arguments);
+    // Get.toNamed(Routes.BOOKING_DETAIL, arguments: arguments);
   }
 
   void initializeFilteredVenues() {

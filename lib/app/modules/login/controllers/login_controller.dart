@@ -9,6 +9,7 @@ import 'package:cite3/app/routes/app_pages.dart';
 class LoginController extends GetxController with StateMixin {
   late final TextEditingController usernameController;
   late final TextEditingController passwordController;
+  // late UserResponse? userProfile;
 
   @override
   void onInit() {
@@ -28,6 +29,7 @@ class LoginController extends GetxController with StateMixin {
 
     print("data user function");
     dataUser = await UserService.getUser(username);
+     
     return dataUser;
   }
 
@@ -48,9 +50,20 @@ class LoginController extends GetxController with StateMixin {
     change(false, status: RxStatus.loading());
     final isValid =
         await LoginService.login(inputtedUsername, inputtedPassword);
+    UserResponse? dataUser;
+
+    print("data user function");
+    dataUser = await UserService.getUser(inputtedUsername);
+     
     change(true, status: RxStatus.success());
 
     if (isValid ?? false) {
+
+       final arguments = {
+      'infoUser': dataUser ,
+      'username':inputtedUsername
+    };
+
 //     if (cred.role == "client") {
 //       //! get type if type==user then show user ui otherwise show doctor ui
 
@@ -59,8 +72,10 @@ class LoginController extends GetxController with StateMixin {
 //     } else if (cred.role == "owner") {
 //            Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
 //  }
-      // Get.offAllNamed(Routes.HOMEOWNER, arguments: inputtedUsername);
-      Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
+
+
+      // Get.offAllNamed(Routes.HOMEOWNER, arguments: arguments);
+      Get.offAllNamed(Routes.HOME, arguments: arguments);
       return;
     }
 

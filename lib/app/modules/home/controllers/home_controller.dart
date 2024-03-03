@@ -9,9 +9,9 @@ import '../../history_booking/views/history_booking_view.dart';
 import '../../profile/views/profile_view.dart';
 
 class HomeController extends GetxController {
-  final String username = Get.arguments;
-  UserResponse? dataUser;
-
+  late final String? username  ;
+    UserResponse? dataUser;
+   
   var pageIndex = 0.obs;
   var pageController = PageController(initialPage: 0);
   var bySlide = false.obs;
@@ -23,11 +23,14 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+ 
   void getDataUser() async {
-    print("data user function");
-    dataUser = await UserService.getUser(username);
-    print("$dataUser.address");
+      username = Get.arguments['username'];
+    dataUser=Get.arguments['infoUser'];
+
+    
   }
+
 
   List<Widget> pages = [
     const AllVenueView(),

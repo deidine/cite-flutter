@@ -16,17 +16,15 @@ class AllVenueView extends GetView<AllVenueController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customWhiteAppBar('Explore'),
-      drawer:GlobalDrawer(),
-
+      drawer: GlobalDrawer(),
       body: controller.obx(
-        (state) =>   SingleChildScrollView(
+        (state) => SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               HeaderCategoryVenueBuilder(),
               ContentOfFilteredVenue(),
               AllVenueContentBuilder(),
-             
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:cite3/app/core/themes/custom_snackbar_theme.dart';
 import 'package:cite3/app/data/enum/venue_category_enum.dart';
+import 'package:cite3/app/data/model/user/user_response.dart';
 import 'package:cite3/citte_owner/owner_home/controllers/home_owner_controller.dart';
 import 'package:get/get.dart'; 
 import 'package:cite3/app/data/model/venue/venue_response.dart';
@@ -8,19 +9,22 @@ import 'package:cite3/app/routes/app_pages.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AllVenueOwnerController extends GetxController with StateMixin {
-  late List<VenueResponse>? venues = [];
+  late List<VenueResponse>? venues  ;
   final refreshController = RefreshController();
 
   var filteredVenues = <VenueResponse>[].obs;
-  late final homeController = Get.find<HomeOwnerController>();
-  late int? iduser;
+     HomeOwnerController? homeController= Get.find<HomeOwnerController>(); 
+    UserResponse? dataUser;
+
+    late int  iduser;
   var deletedId;
-  
+  // https://vscode.dev/github/deidine/cite-flutter/blob/main/lib/citte_owner/all_payment/controllers
   @override
-  void onInit()  {
-    iduser = homeController.userProfile!.idUser;
-    fetchData(iduser!);
-    super.onInit();
+  void onInit()  {    
+
+    iduser = homeController!.dataUser!.idUser;
+    fetchData(iduser);
+     super.onInit();
     print("defined");
   }
 
@@ -30,7 +34,7 @@ class AllVenueOwnerController extends GetxController with StateMixin {
   }
 
   void toBookingFieldPage(VenueResponse venue) {
-    if (homeController.dataUser == null) {
+    if (homeController?.dataUser == null) {
       return;
     }
 

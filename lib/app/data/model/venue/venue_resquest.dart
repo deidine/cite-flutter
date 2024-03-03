@@ -23,17 +23,14 @@ class VenueRequest {
   });
 
   Map<String, String> toJson() {
-   
-    
-      return {
-        'userId':userId.toString(),
-        'venueName': venueName,
-        'pricePerHour': pricePerHour.toString(),
-        'location': location,
-        'category': category,
-        'rating': rating.toString(),
- 'status':status
-      };
-   
+    return {
+      'userId': userId.toString(),
+      'venueName': venueName,
+      'pricePerHour': pricePerHour.toString(),
+      'location': location,
+      'category': category,
+      'rating': rating.toString(),
+      'status': status
+    };
   }
 }

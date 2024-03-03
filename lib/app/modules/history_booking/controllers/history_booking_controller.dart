@@ -31,7 +31,8 @@ class HistoryBookingController extends GetxController with StateMixin {
     change(false, status: RxStatus.loading());
 
     final username = homeController.username;
-    dataUser = await UserService.getUser(username);
+    dataUser =  homeController.dataUser!;
+
     fetchData().then((_) {
       updateBookedFields();
       change(true, status: RxStatus.success());

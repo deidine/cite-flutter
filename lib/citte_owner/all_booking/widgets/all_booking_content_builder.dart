@@ -30,7 +30,8 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
           shrinkWrap: true,
           itemCount: controller.bookings.length,
           itemBuilder: (context, index) => GestureDetector(
-            onTap: () => controller.toBookingFieldPage( controller.bookings[index].userId! ,controller.bookings[index]),
+            onTap: () => controller.toBookingFieldPage(
+                controller.bookings[index].userId!, controller.bookings[index]),
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
@@ -60,21 +61,26 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
                           _buildDetailRow(
                             context,
                             icon: Icons.timer,
-                            text: "${controller.getDetailUser(controller.bookings[index].userId!)!.idUser} id",
-                          ),  _buildDetailRow(
+                            text:
+                                "${controller.getDetailUser(controller.bookings[index].userId!)!.idUser} id",
+                          ),
+                          _buildDetailRow(
                             context,
                             icon: Icons.timer,
-                            text: "${controller.bookings[index].hours.toString()} min",
+                            text:
+                                "${controller.bookings[index].hours.toString()} min",
                           ),
                           _buildDetailRow(
                             context,
                             icon: Icons.date_range,
-                            text: "Date ${controller.bookings[index].bookingTime}",
+                            text:
+                                "Date ${controller.bookings[index].bookingTime}",
                           ),
                           _buildDetailRow(
                             context,
                             icon: Icons.start,
-                            text: "Begin ${controller.bookings[index].beginTime}",
+                            text:
+                                "Begin ${controller.bookings[index].beginTime}",
                           ),
                           _buildDetailRow(
                             context,
@@ -112,7 +118,8 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
     );
   }
 
-  Widget _buildDetailRow(BuildContext context, {required IconData icon, required String text}) {
+  Widget _buildDetailRow(BuildContext context,
+      {required IconData icon, required String text}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -123,7 +130,9 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
             size: MediaQuery.of(context).size.width * 0.04,
           ),
           SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-          Text(text, style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.045)),
+          Text(text,
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.045)),
         ],
       ),
     );
