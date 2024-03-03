@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import check_password
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
@@ -56,11 +57,19 @@ def update_employee(request, id):
 def create_employee(request):
     if request.method == 'POST':
         serializer = EmployeeSerializer(data=request.data)
+        # from django.contrib.auth.hashers import make_password
+
+        #     raw_password = request.POST.get('password')
+        # hashed_password = make_password(raw_password)
         print( request.data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+ 
+
 
 def get_employee_list(request):
     employees = [
@@ -94,17 +103,31 @@ def get_employeByname(request,username):
 
 # @csrf_exempt
 
+
 @api_view(['POST'])
 def login(request):
-    username = request.data.get('username')
-    password = request.data.get('password')
-    if employee_exists(username,password):
-        return HttpResponse('Employee exists')
+    if request.method == 'POST':
+        username = request.data.get('username')
+        password = request.data.get('password')
+        
+        # Check if the username exists in the EmployeeList
+        employee = EmployeeList.objects.filter(username=username).first()
+        if employee:
+            # Verify the password
+            # if check_password(password, employee.password):
+            if (EmployeeList.objects.filter(password=password).first()):
+                # Password is correct
+                return Response({'message': 'Login successful'})
+            else:
+                # Password is incorrect
+                return Response({'error': 'Invalid password'}, status=400)
+        else:
+            # Username does not exist
+            return Response({'error': 'Employee does not exist'}, status=400)
     else:
-        return HttpResponse('Employee does not exist')
+        return Response({'error': 'Invalid request method'}, status=405)
     
 
- 
 def get_csrf_token(request):
     # Get the CSRF token from the request's cookies
     csrf_token = request.COOKIES.get('csrftoken')

@@ -44,8 +44,8 @@ late ReservationResponse infoBooking ;
       'isEditReservation': false,
       'transactionId': 0,
     };
-
-    Get.toNamed(Routes.ALL_BOOKING_OWNER, arguments: arguments);
+    Get.toNamed(Routes.BOOKING_DETAIL, arguments: arguments);
+ 
   }
 
   void handleDeleteBookingField() async {

@@ -36,6 +36,7 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
+              elevation: 4, // Added elevation for a lifted look
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -49,7 +50,7 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
                         phoneNumber: controller
                             .getDetailUser(controller.bookings[index].userId!)!
                             .phoneNumber,
-                        status: controller.bookings[index].status!,
+                        status: controller.bookings[index].status!, 
                       ),
                     ),
                     SizedBox(width: screenWidth * 0.04),
@@ -108,12 +109,27 @@ class AllBookingContentBuilder extends GetView<AllBookingController> {
                         ],
                       ),
                     ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Get.toNamed(Routes.BOOKING_DETAIL, arguments: arguments);
+                        controller.send(controller.bookings[index].userId!,
+                            controller.bookings[index]);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: green, // Background color
+                        onPrimary: Colors.white, // Text color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30), // Border radius
+                        ),
+                      ),
+                      child: Text('Press Me'),
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }

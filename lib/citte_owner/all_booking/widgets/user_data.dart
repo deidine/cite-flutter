@@ -2,6 +2,7 @@ import 'package:cite3/app/core/values/colors.dart';
 import 'package:cite3/app/data/model/reservation/user_reservation_model.dart';
 import 'package:cite3/app/global_widgets/user_reservations/single_play_hour_builder.dart';
 import 'package:cite3/citte_owner/all_booking/widgets/custom_action_button.dart';
+import 'package:cite3/citte_owner/all_booking/widgets/custum_container.dart';
 import 'package:flutter/material.dart';
 
 class UserDataBuilder extends StatelessWidget {
@@ -50,12 +51,11 @@ class UserDataBuilder extends StatelessWidget {
           ),
         ),
         SizedBox(height: 16),
-        CustomActionButton(
+        CustomContainer(
           backgroundColor: status == 'valid' ? Colors.green : Colors.red,
           borderColor: Colors.black,
           textColor: Colors.white,
-          label: status,
-          onTap: () {},
+          label: status, 
         ),
         SizedBox(height: 16),
       ],

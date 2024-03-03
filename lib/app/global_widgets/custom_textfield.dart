@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     required this.isObscure,
     required this.textStyle,
+      this.keyboardType
   }) : super(key: key);
 
   final String label;
@@ -17,10 +18,12 @@ class CustomTextField extends StatelessWidget {
   final IconData icon;
   final bool isObscure;
   final TextStyle textStyle;
-
+final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return TextField(
+            keyboardType:   keyboardType,
+
       obscureText: isObscure,
       controller: controller,
       style: textStyle,

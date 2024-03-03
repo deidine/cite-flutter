@@ -13,8 +13,9 @@ abstract class RegisterRepository {
 
   static Future<int> register(RegisterRequest user) async {
       try {
-      var stream = http.ByteStream(DelegatingStream.typed(user.image!.openRead()));
-      var length = await user.image!.length();
+        print("inser user${user.image.path}");
+      var stream = http.ByteStream(DelegatingStream.typed(user.image.openRead()));
+      var length = await user.image.length();
 
       var uri = Uri.parse(ApiProvider.register);
       var request = http.MultipartRequest("POST", uri);
@@ -22,7 +23,7 @@ abstract class RegisterRepository {
         'image',//the same shuld be in backend serliser
         stream,
         length,
-        filename: basename(user.image!.path),
+        filename: basename(user.image.path),
         // contentType: MediaType('image', 'jpeg'), // Adjust content type as necessary
       );
 

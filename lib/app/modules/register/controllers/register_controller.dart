@@ -25,11 +25,15 @@ class RegisterController extends GetxController with StateMixin {
 
     super.onInit();
   }
-late Rx<Role> selectedRole = Role.client.obs; // Initialize with default role
 
-void updateFilteredRole(Role role) {
-  selectedRole.value = role;
-}
+  List<String> item = ["owner", "client"];
+
+  late String selectedRole = item.first; // Initialize with default role
+
+  void updateFilteredRole(String role) {
+    selectedRole = role;
+  }
+
   void setImage(File? pickedImage) {
     image = pickedImage;
     update(); // Notify the UI to rebuild
@@ -42,6 +46,7 @@ void updateFilteredRole(Role role) {
     emailController = TextEditingController();
     usernameController = TextEditingController();
     passwordController = TextEditingController();
+    image=null;
   }
 
   bool isAnyEmptyField() {
@@ -54,17 +59,18 @@ void updateFilteredRole(Role role) {
   }
 
   bool isAllFieldValid() {
-    final isNameContainNumber = fullNameController.text.contains(
-      RegExp(r'[0-9]'),
-    );
-    final isValidPhoneNumber =
-        int.tryParse(phoneNumberController.text) != null &&
-            phoneNumberController.text.length == 12;
-    final isValidEmail = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-    ).hasMatch(emailController.text);
+    // final isNameContainNumber = fullNameController.text.contains(
+    //   RegExp(r'[0-9]'),
+    // );
+    // final isValidPhoneNumber =
+    //     int.tryParse(phoneNumberController.text) != null &&
+    //         phoneNumberController.text.length == 12;
+    // final isValidEmail = RegExp(
+    //   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    // ).hasMatch(emailController.text);
 
-    return isValidEmail && isValidPhoneNumber && !isNameContainNumber;
+    // return isValidEmail && isValidPhoneNumber && !isNameContainNumber;
+    return true;
   }
 
   void handleRegister() async {
@@ -90,17 +96,33 @@ void updateFilteredRole(Role role) {
     final email = emailController.text;
     final username = usernameController.text;
     final password = passwordController.text;
+    final request;
+    if (image == null) {
+      request = RegisterRequest(
+        name: name,
+        address: address,
+        phoneNumber: phoneNumber,
+        email: email,
+        username: username,
+        password: password,
+        image: File("assets/dp.jpg"),
+        status: 'valid',
 
-    final request = RegisterRequest(
-      name: name,
-      address: address,
-      phoneNumber: phoneNumber,
-      email: email,
-      username: username,
-      password: password,
-      // role:'client'
-       role: selectedRole.value.toString().split('.').last,
-    );
+        role: selectedRole,
+      );
+    } else {
+      request = RegisterRequest(
+        name: name,
+        address: address,
+        phoneNumber: phoneNumber,
+        email: email,
+        username: username,
+        password: password,
+        image: image!,
+        role: selectedRole,
+        status: 'valid'
+      );
+    }
 
     change(false, status: RxStatus.loading());
     final isSuccess = await RegisterService.register(request);
@@ -123,10 +145,7 @@ void updateFilteredRole(Role role) {
       message: 'Username already exist',
     );
   }
-    Rx<Role> role = Rx(Role.client); // Set a default role
 
-  late List<String> venues;
- 
   void reloadScreen() {
     update(); // This will force the screen to rebuild
   }

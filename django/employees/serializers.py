@@ -4,8 +4,8 @@ from rest_framework import serializers
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployeeList
-        fields = ('id','name', 'address', 'phoneNumber', 'email', 'username','role', 'password','image')
+        fields = ( 'id','name', 'address', 'phoneNumber', 'email', 'username','role', 'status','password','image')
 class EmployeeSerializerUpdate(serializers.ModelSerializer):
     class Meta:
         model = EmployeeList
-        fields = ('id','name', 'address', 'phoneNumber', 'email' )
+        fields = ('id','name', 'address', 'phoneNumber', 'email','status' )

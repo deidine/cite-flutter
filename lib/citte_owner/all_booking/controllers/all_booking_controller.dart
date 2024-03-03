@@ -19,7 +19,7 @@ class AllBookingController extends GetxController with StateMixin {
   var filteredVenues = <VenueResponse>[].obs;
   final homeController = Get.find<HomeOwnerController>();
   // var bookings = <ReservationResponse>[].obs;
-  late List<UserResponse> dataUsers;
+  late List<UserResponse>? dataUsers;
   late final venuId;
   late UserResponse user;
 
@@ -37,8 +37,8 @@ class AllBookingController extends GetxController with StateMixin {
   }
 
   UserResponse? getDetailUser(int id) {
-    if (dataUsers.isNotEmpty) {
-      return dataUsers.where((element) => element.idUser == id).first;
+    if (dataUsers!.isNotEmpty) {
+      return dataUsers!.where((element) => element.idUser == id).first;
     }
     return null;
   }
@@ -67,7 +67,6 @@ class AllBookingController extends GetxController with StateMixin {
       'userId': userId,
     };
     Get.toNamed(Routes.ALL_PAYMENT, arguments: arguments);
-    // Get.toNamed(Routes.BOOKING_DETAIL, arguments: arguments);
   }
 
   void initializeFilteredVenues() {
@@ -172,4 +171,19 @@ class AllBookingController extends GetxController with StateMixin {
 // toBookingFieldPage();
     refreshController.refreshCompleted();
   }
+
+void send(int userId, ReservationResponse bookings){
+   UserResponse? user = getDetailUser(userId);
+    //  ReservationResponse?  bookings;
+
+    final arguments = {
+      'infoUser': user,
+      'infoBooking': bookings,
+      'userId': userId,
+    };
+    Get.toNamed(Routes.BOOKING_DETAIL, arguments: arguments);
+
+}
+
+
 }

@@ -29,7 +29,7 @@ class LoginController extends GetxController with StateMixin {
 
     print("data user function");
     dataUser = await UserService.getUser(username);
-     
+
     return dataUser;
   }
 
@@ -54,28 +54,20 @@ class LoginController extends GetxController with StateMixin {
 
     print("data user function");
     dataUser = await UserService.getUser(inputtedUsername);
-     
+
     change(true, status: RxStatus.success());
 
     if (isValid ?? false) {
+      final arguments = {'infoUser': dataUser, 'username': inputtedUsername};
 
-       final arguments = {
-      'infoUser': dataUser ,
-      'username':inputtedUsername
-    };
+      if (dataUser.role == "client") {
+        //! get type if type==user then show user ui otherwise show doctor ui
 
-//     if (cred.role == "client") {
-//       //! get type if type==user then show user ui otherwise show doctor ui
+        Get.offAllNamed(Routes.HOME, arguments: arguments);
+      } else if (dataUser.role == "owner") {
+        Get.offAllNamed(Routes.HOMEOWNER, arguments: arguments);
+      }
 
-//            Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
-
-//     } else if (cred.role == "owner") {
-//            Get.offAllNamed(Routes.HOME, arguments: inputtedUsername);
-//  }
-
-
-      // Get.offAllNamed(Routes.HOMEOWNER, arguments: arguments);
-      Get.offAllNamed(Routes.HOME, arguments: arguments);
       return;
     }
 

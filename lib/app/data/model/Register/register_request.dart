@@ -7,17 +7,18 @@ class RegisterRequest {
   final String? email;
   final String username;
   final String password;
-  final String role;
-  final File? image;
-  RegisterRequest({
-    this.name,
-    this.address,
-    this.phoneNumber,
-    this.email,
+  final String role,status;
+  final File   image;
+  RegisterRequest( {
+  required  this.name,
+  required  this.address,
+  required  this.phoneNumber,
+    required this.email,
     required this.username,
     required this.password,
     required this.role,
-      this.image,
+    required this.status,
+     required this.image,
   });
 
   Map<String, String> toJson() {
@@ -29,6 +30,7 @@ class RegisterRequest {
       'role': role,
       'username': username,
       'password': password,
+      'status':status
     };
   }
 
@@ -40,6 +42,8 @@ class RegisterRequest {
         phoneNumber: json['phoneNumber'],
         email: json['email'],
         username: json['username'],
-        password: json['password']);
+        password: json['password'],
+        status: json['status'],
+        image: json['image']);
   }
 }
